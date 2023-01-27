@@ -19,14 +19,107 @@ const grandma = {
   coords: [33.055659303435746, -95.24678425841024],
 };
 
+const bayLatitude = 33.0514234;
+const bayLongitude = -95.246532;
+const bayCoords = [bayLatitude, bayLongitude];
+const map = L.map('map').setView(bayCoords, 15);
+const residentContent = document.querySelector('.resident-content');
+
 const mapElement = document.getElementById('map');
-// const form = document.querySelector('.form');
-// const containerWorkouts = document.querySelector('.workouts');
-// const inputType = document.querySelector('.form__input--type');
-// const inputDistance = document.querySelector('.form__input--distance');
-// const inputDuration = document.querySelector('.form__input--duration');
-// const inputCadence = document.querySelector('.form__input--cadence');
-// const inputElevation = document.querySelector('.form__input--elevation');
+
+const App = class {
+  constructor() {
+    // Load Map
+    this._loadMap();
+
+    // Load Icons
+    this._loadIcons();
+
+    // Show Current Resident Data
+    this._showCurrentResidentData();
+  }
+
+  _loadMap() {
+    L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+  }
+
+  _loadIcons() {
+    const jakeIcon = this._createIcon('./img/jake.png');
+    const grandmaIcon = this._createIcon('./img/eagle.png');
+    const mikeIcon = this._createIcon('./img/weed.png');
+
+    this._setMarker(jake.coords, jakeIcon, 'Jake Smith');
+    this._setMarker(grandma.coords, grandmaIcon, 'The Eagles Nest');
+  }
+
+  _createIcon(iconSRC) {
+    const residentIcon = L.Icon.extend({
+      options: {
+        // shadowUrl: 'leaf-shadow.png',
+        iconSize: [20, 30],
+        // shadowSize: [50, 64],
+        iconAnchor: [0, 0],
+        // shadowAnchor: [4, 62],
+        popupAnchor: [10, 10],
+        className: 'resident-icon',
+      },
+    });
+
+    return new residentIcon({ iconUrl: iconSRC });
+  }
+
+  _setMarker(coords, residentIcon, residentName) {
+    L.marker(coords, { icon: residentIcon })
+      .addTo(map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          className: 'resident-popup',
+        })
+      )
+      .setPopupContent(residentName);
+  }
+
+  _showCurrentResidentData() {
+    // On Map
+    map.on('click', function (mapE) {
+      const { lat, lng } = mapE.latlng;
+      console.log(lat, lng);
+    });
+
+    // On Map Element
+    mapElement.addEventListener('click', function (e) {
+      if (!e.target.src) {
+        residentContent.innerHTML = '';
+        return;
+      }
+
+      const showResidentContent = function (iconName, name, backstory) {
+        if (e.target.src.includes(iconName)) {
+          console.log(iconName);
+          residentContent.innerHTML = `
+        <h2>Resident: ${name}</h2>
+        <h3>Residents Backstory</h3>
+        <p class="resident-content__text">
+          ${backstory}
+        </p>
+        `;
+        }
+      };
+
+      showResidentContent('jake', jake.name, jake.backstory);
+      showResidentContent('eagle', grandma.name, grandma.backstory);
+    });
+  }
+};
+
+const app = new App();
 
 // if (navigator.geolocation)
 //   navigator.geolocation.getCurrentPosition(
@@ -42,104 +135,3 @@ const mapElement = document.getElementById('map');
 //       alert(`Could not get your position`);
 //     }
 //   );
-const bayLatitude = 33.0514234;
-const bayLongitude = -95.246532;
-const bayCoords = [bayLatitude, bayLongitude];
-const map = L.map('map').setView(bayCoords, 15);
-const residentContent = document.querySelector('.resident-content');
-
-const loadMap = function () {
-  // L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-  //   attribution:
-  //     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  // }).addTo(map);
-
-  L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-
-  // L.marker(coords)
-  //   .addTo(map)
-  //   .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-  //   .openPopup();
-};
-loadMap();
-
-const loadIcons = function () {
-  const residentIcon = L.Icon.extend({
-    options: {
-      // shadowUrl: 'leaf-shadow.png',
-      iconSize: [20, 30],
-      // shadowSize: [50, 64],
-      iconAnchor: [0, 0],
-      // shadowAnchor: [4, 62],
-      popupAnchor: [10, 10],
-      className: 'resident-icon',
-    },
-  });
-
-  const createIcon = function (iconSRC) {
-    return new residentIcon({ iconUrl: iconSRC });
-  };
-
-  const jakeIcon = createIcon('./img/jake.png');
-
-  const grandmaIcon = createIcon('./img/eagle.png');
-
-  const mikeIcon = createIcon('./img/weed.png');
-
-  const setMarker = function (coords, residentIcon, residentName) {
-    L.marker(coords, { icon: residentIcon })
-      .addTo(map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          className: 'resident-popup',
-        })
-      )
-      .setPopupContent(residentName);
-  };
-
-  setMarker(jake.coords, jakeIcon, 'Jake Smith');
-  setMarker(grandma.coords, grandmaIcon, 'The Eagles Nest');
-};
-loadIcons();
-
-const showCurrentResident = function () {
-  // On Map
-  map.on('click', function (mapE) {
-    const { lat, lng } = mapE.latlng;
-    console.log(lat, lng);
-  });
-
-  // On Map Element
-  mapElement.addEventListener('click', function (e) {
-    if (!e.target.src) {
-      residentContent.innerHTML = '';
-      return;
-    }
-
-    console.log(e.target.src);
-
-    const showResidentContent = function (iconName, name, backstory) {
-      if (e.target.src.includes(iconName)) {
-        console.log(iconName);
-        residentContent.innerHTML = `
-        <h2>Resident: ${name}</h2>
-        <h3>Residents Backstory</h3>
-        <p class="resident-content__text">
-          ${backstory}
-        </p>
-        `;
-      }
-    };
-
-    showResidentContent('jake', jake.name, jake.backstory);
-    showResidentContent('eagle', grandma.name, grandma.backstory);
-  });
-};
-showCurrentResident();
