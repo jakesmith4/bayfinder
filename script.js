@@ -15,6 +15,8 @@ const grandma = {
   name: 'Mary Lo Leffler',
   backstory:
     'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
+
+  coords: [33.055659303435746, -95.24678425841024],
 };
 
 const mapElement = document.getElementById('map');
@@ -40,10 +42,11 @@ const mapElement = document.getElementById('map');
 //       alert(`Could not get your position`);
 //     }
 //   );
-const latitude = 33.0514234;
-const longitude = -95.246532;
-const coords = [latitude, longitude];
-const map = L.map('map').setView(coords, 15);
+const bayLatitude = 33.0514234;
+const bayLongitude = -95.246532;
+const bayCoords = [bayLatitude, bayLongitude];
+const map = L.map('map').setView(bayCoords, 15);
+const residentContent = document.querySelector('.resident-content');
 
 const loadMap = function () {
   // L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -66,10 +69,6 @@ const loadMap = function () {
 loadMap();
 
 const loadIcons = function () {
-  const grandmaLatitude = 33.055659303435746;
-  const grandmaLongitude = -95.24678425841024;
-  const grandmaCoords = [grandmaLatitude, grandmaLongitude];
-
   const residentIcon = L.Icon.extend({
     options: {
       // shadowUrl: 'leaf-shadow.png',
@@ -106,11 +105,9 @@ const loadIcons = function () {
   };
 
   setMarker(jake.coords, jakeIcon, 'Jake Smith');
-  setMarker(grandmaCoords, grandmaIcon, 'The Eagles Nest');
+  setMarker(grandma.coords, grandmaIcon, 'The Eagles Nest');
 };
 loadIcons();
-
-const residentContent = document.querySelector('.resident-content');
 
 const showCurrentResident = function () {
   // On Map
