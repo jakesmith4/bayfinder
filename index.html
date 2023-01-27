@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" type="image/png" href="/icon.png" />
 
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Style CSS -->
     <link rel="stylesheet" href="style.css" />
 
     <!-- Font Awesome CDN -->
@@ -22,6 +24,21 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <!-- Script JS -->
     <script defer src="script.js"></script>
     <title>Bayfinder // Find folks in Pelican Bay</title>
   </head>
@@ -30,11 +47,11 @@
       <!-- <img src="logo.png" alt="Logo" class="logo" /> -->
       <div class="bayfinder">
         <span><i class="fa-solid fa-map-location-dot fa-5x"></i></span>
-        <h1 class="bayfinder__heading">Bay-Finder</h1>
+        <h1 class="bayfinder__heading">Bay Finder</h1>
       </div>
 
-      <ul class="workouts">
-        <form class="form hidden">
+      <div class="resident-content">
+        <!-- <form class="form hidden">
           <div class="form__row">
             <label class="form__label">Type</label>
             <select class="form__input form__input--type">
@@ -68,7 +85,7 @@
             />
           </div>
           <button class="form__btn">OK</button>
-        </form>
+        </form> -->
 
         <!-- <li class="workout workout--running" data-id="1234567890">
           <h2 class="workout__title">Running on April 14</h2>
@@ -117,18 +134,17 @@
             <span class="workout__unit">m</span>
           </div>
         </li> -->
-      </ul>
-
-      <p class="copyright">
-        &copy; Copyright by
-        <a
-          class="twitter-link"
-          target="_blank"
-          href="https://www.facebook.com/profile.php?id=100000047980515"
-          >Jacob Smith</a
-        >. Use for searching the residents of Pelican Bay. DO NOT use this
-        application to stalk people!!
-      </p>
+        <small class="copyright">
+          &copy; Copyright by
+          <a
+            class="facebook-link"
+            target="_blank"
+            href="https://www.facebook.com/profile.php?id=100000047980515"
+            >Jacob Smith</a
+          >. Use for searching the residents of Pelican Bay. DO NOT use this
+          application to stalk people!!
+        </small>
+      </div>
     </div>
 
     <div id="map"></div>
