@@ -3,6 +3,20 @@
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+const jake = {
+  name: 'Jake Smith',
+  backstory:
+    'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
+
+  coords: [33.055495388400004, -95.24646195841026],
+};
+
+const grandma = {
+  name: 'Mary Lo Leffler',
+  backstory:
+    'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
+};
+
 const mapElement = document.getElementById('map');
 // const form = document.querySelector('.form');
 // const containerWorkouts = document.querySelector('.workouts');
@@ -52,10 +66,6 @@ const loadMap = function () {
 loadMap();
 
 const loadIcons = function () {
-  const jakeLatitude = 33.055495388400004;
-  const jakeLongitude = -95.24646195841026;
-  const jakeCoords = [jakeLatitude, jakeLongitude];
-
   const grandmaLatitude = 33.055659303435746;
   const grandmaLongitude = -95.24678425841024;
   const grandmaCoords = [grandmaLatitude, grandmaLongitude];
@@ -72,36 +82,35 @@ const loadIcons = function () {
     },
   });
 
-  const jakeIcon = new residentIcon({ iconUrl: './img/jake.png' });
+  const createIcon = function (iconSRC) {
+    return new residentIcon({ iconUrl: iconSRC });
+  };
 
-  console.log(jakeIcon);
+  const jakeIcon = createIcon('./img/jake.png');
 
-  const mikeIcon = new residentIcon({ iconUrl: './img/weed.png' });
+  const grandmaIcon = createIcon('./img/eagle.png');
 
-  const grandmaIcon = new residentIcon({ iconUrl: './img/eagle.png' });
+  const mikeIcon = createIcon('./img/weed.png');
 
-  L.marker(jakeCoords, { icon: jakeIcon }).addTo(map).bindPopup('Jake Smith');
-  // .openPopup();
+  const setMarker = function (coords, residentIcon, residentName) {
+    L.marker(coords, { icon: residentIcon })
+      .addTo(map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          className: 'resident-popup',
+        })
+      )
+      .setPopupContent(residentName);
+  };
 
-  L.marker(grandmaCoords, { icon: grandmaIcon })
-    .addTo(map)
-    .bindPopup('The Eagles Nest');
+  setMarker(jake.coords, jakeIcon, 'Jake Smith');
+  setMarker(grandmaCoords, grandmaIcon, 'The Eagles Nest');
 };
 loadIcons();
 
 const residentContent = document.querySelector('.resident-content');
-
-const jake = {
-  name: 'Jake Smith',
-  backstory:
-    'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
-};
-
-const grandma = {
-  name: 'Mary Lo Leffler',
-  backstory:
-    'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
-};
 
 const showCurrentResident = function () {
   // On Map
@@ -113,16 +122,7 @@ const showCurrentResident = function () {
   // On Map Element
   mapElement.addEventListener('click', function (e) {
     if (!e.target.src) {
-      residentContent.innerHTML = `<p class="copyright">
-        &copy; Copyright by
-        <a
-          class="twitter-link"
-          target="_blank"
-          href="https://www.facebook.com/profile.php?id=100000047980515"
-          >Jacob Smith</a
-        >. Use for searching the residents of Pelican Bay. DO NOT use this
-        application to stalk people!!
-      </p>`;
+      residentContent.innerHTML = '';
       return;
     }
 
