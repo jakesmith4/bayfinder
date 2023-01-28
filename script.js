@@ -31,6 +31,9 @@ const App = class {
     // Load Map
     this._loadMap();
 
+    // Get Position
+    this._watchCurrentPostion();
+
     // Create Resident Objects
     this._createResidents();
 
@@ -46,7 +49,7 @@ const App = class {
     );
 
     // On Map Event
-    this.#map.on('click', this._getCurrentPosition.bind(this));
+    this.#map.on('click', this._getMapClickCoords.bind(this));
   }
 
   _loadMap() {
@@ -56,8 +59,6 @@ const App = class {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
-
-    // L.control.locate().addTo(this.#map);
   }
 
   _loadIcons() {
@@ -78,11 +79,8 @@ const App = class {
   _createIcon(iconSRC) {
     const residentIcon = L.Icon.extend({
       options: {
-        // shadowUrl: 'leaf-shadow.png',
         iconSize: [35, 35],
-        // shadowSize: [50, 64],
-        iconAnchor: [0, 0],
-        // shadowAnchor: [4, 62],
+        iconAnchor: [7, 0],
         popupAnchor: [10, 10],
         className: 'resident-icon',
       },
@@ -102,6 +100,44 @@ const App = class {
         })
       )
       .setPopupContent(residentName);
+  }
+
+  _watchCurrentPostion() {
+    if (navigator.geolocation)
+      navigator.geolocation.watchPosition(
+        this._addCurrentLocation.bind(this),
+        function () {
+          alert(`Could not get your position`);
+        }
+      );
+  }
+
+  _addCurrentLocation(position) {
+    const { latitude, longitude } = position.coords;
+
+    console.log(position);
+    console.log(latitude);
+    console.log(longitude);
+
+    L.circle([33.0514234, -95.246532], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 6,
+    })
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          className: 'resident-popup',
+        })
+      )
+      .setPopupContent(
+        `You are within ${position.coords.accuracy.toFixed(
+          1
+        )} meters from this position`
+      );
   }
 
   _createResidents() {
@@ -171,7 +207,7 @@ const App = class {
     }
   }
 
-  _getCurrentPosition(mapE) {
+  _getMapClickCoords(mapE) {
     const { lat, lng } = mapE.latlng;
     console.log(lat, lng);
   }
