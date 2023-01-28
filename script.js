@@ -214,18 +214,3 @@ const App = class {
 };
 
 const app = new App();
-
-// if (navigator.geolocation)
-//   navigator.geolocation.getCurrentPosition(
-//     function (position) {
-//       // const { latitude, longitude } = position.coords;
-//       const latitude = 33.0514234;
-//       const longitude = -95.246532;
-//       console.log(latitude);
-//       console.log(longitude);
-//       console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
-//     },
-//     function () {
-//       alert(`Could not get your position`);
-//     }
-//   );
