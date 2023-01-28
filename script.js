@@ -56,6 +56,8 @@ const App = class {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
+
+    // L.control.locate().addTo(this.#map);
   }
 
   _loadIcons() {
@@ -135,7 +137,13 @@ const App = class {
     }
 
     // Jake
-    this._showResidentContent('jake', this.#jake.name, this.#jake.backstory, e);
+    this._showResidentContent(
+      'jake',
+      this.#jake.name,
+      this.#jake.backstory,
+      e,
+      './img/jake-headshot.jpg'
+    );
 
     // Grandma
     this._showResidentContent(
@@ -149,12 +157,13 @@ const App = class {
     this._showResidentContent('weed', this.#mike.name, this.#mike.backstory, e);
   }
 
-  _showResidentContent(iconName, name, backstory, e) {
+  _showResidentContent(iconName, name, backstory, e, img) {
     if (e.target.src.includes(iconName)) {
       console.log(iconName);
       residentContent.innerHTML = `
-        <h2>Resident: ${name}</h2>
-        <h3>Residents Backstory</h3>
+        <img src="${img}" alt="${iconName}" class="resident-content__img">
+        <h2 class="resident-content__name">${name}</h2>
+        <h3 class="resident-content__backstory">Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
         </p>

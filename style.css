@@ -84,7 +84,26 @@ a:visited {
   width: 0;
 }
 
+.resident-content__img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--color-brand--2);
+}
+
+.resident-content__name {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.resident-content__backstory {
+  font-size: 1.8rem;
+}
+
 .resident-content__text {
+  font-size: 1.3rem;
   max-width: 400px;
   margin: auto;
 }
