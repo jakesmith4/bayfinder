@@ -63,8 +63,13 @@ const App = class {
     const grandmaIcon = this._createIcon('./img/eagle.png');
     const mikeIcon = this._createIcon('./img/weed.png');
 
+    // Jake
     this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
+
+    // Grandma
     this._setMarker(this.#grandma.coords, grandmaIcon, 'The Eagles Nest');
+
+    // Mike
     this._setMarker(this.#mike.coords, mikeIcon, 'Mikes Weed Shop');
   }
 
@@ -98,6 +103,7 @@ const App = class {
   }
 
   _createResidents() {
+    // Jake
     this.#jake = new Resident(
       'Jake Smith',
       'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
@@ -105,6 +111,7 @@ const App = class {
       -95.24646195841026
     );
 
+    // Grandma
     this.#grandma = new Resident(
       'Marry Lo Leffler',
       'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
@@ -112,6 +119,7 @@ const App = class {
       -95.24678425841024
     );
 
+    // Mike
     this.#mike = new Resident(
       'Mike',
       'Mike is the weed dealer of the bay, anytime you need some good smoke, this is where you go. Good bud for good prices!!',
@@ -126,13 +134,18 @@ const App = class {
       return;
     }
 
+    // Jake
     this._showResidentContent('jake', this.#jake.name, this.#jake.backstory, e);
+
+    // Grandma
     this._showResidentContent(
       'eagle',
       this.#grandma.name,
       this.#grandma.backstory,
       e
     );
+
+    // Mike
     this._showResidentContent('weed', this.#mike.name, this.#mike.backstory, e);
   }
 
