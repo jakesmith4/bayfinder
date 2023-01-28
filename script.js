@@ -1,35 +1,38 @@
 'use strict';
 
-// prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-const jake = {
-  name: 'Jake Smith',
-  backstory:
-    'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
-
-  coords: [33.055495388400004, -95.24646195841026],
-};
-
-const grandma = {
-  name: 'Mary Lo Leffler',
-  backstory:
-    'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
-
-  coords: [33.055659303435746, -95.24678425841024],
-};
-
 const residentContent = document.querySelector('.resident-content');
-
 const mapElement = document.getElementById('map');
 
+const Resident = class {
+  constructor(name, backstory, latitude, longitude) {
+    this.name = name;
+    this.backstory = backstory;
+    // this.coords = coords;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.createCoords();
+  }
+
+  createCoords() {
+    this.coords = [this.latitude, this.longitude];
+  }
+};
+
+///////////////////////////////////////////////////
+// APPLICATION ARCHITECHTURE
 const App = class {
   #bayCoords = [33.0514234, -95.246532];
   #map = L.map('map').setView(this.#bayCoords, 15);
+  #jake;
+  #grandma;
+  #mike;
 
   constructor() {
     // Load Map
     this._loadMap();
+
+    // Create Resident Objects
+    this._createResidents();
 
     // Load Icons
     this._loadIcons();
@@ -60,15 +63,16 @@ const App = class {
     const grandmaIcon = this._createIcon('./img/eagle.png');
     const mikeIcon = this._createIcon('./img/weed.png');
 
-    this._setMarker(jake.coords, jakeIcon, 'Jake Smith');
-    this._setMarker(grandma.coords, grandmaIcon, 'The Eagles Nest');
+    this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
+    this._setMarker(this.#grandma.coords, grandmaIcon, 'The Eagles Nest');
+    this._setMarker(this.#mike.coords, mikeIcon, 'Mikes Weed Shop');
   }
 
   _createIcon(iconSRC) {
     const residentIcon = L.Icon.extend({
       options: {
         // shadowUrl: 'leaf-shadow.png',
-        iconSize: [20, 30],
+        iconSize: [35, 35],
         // shadowSize: [50, 64],
         iconAnchor: [0, 0],
         // shadowAnchor: [4, 62],
@@ -93,14 +97,43 @@ const App = class {
       .setPopupContent(residentName);
   }
 
+  _createResidents() {
+    this.#jake = new Resident(
+      'Jake Smith',
+      'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
+      33.055495388400004,
+      -95.24646195841026
+    );
+
+    this.#grandma = new Resident(
+      'Marry Lo Leffler',
+      'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
+      33.055659303435746,
+      -95.24678425841024
+    );
+
+    this.#mike = new Resident(
+      'Mike',
+      'Mike is the weed dealer of the bay, anytime you need some good smoke, this is where you go. Good bud for good prices!!',
+      33.05522028915729,
+      -95.24670727375302
+    );
+  }
+
   _showCurrentResidentData(e) {
     if (!e.target.src) {
       residentContent.innerHTML = '';
       return;
     }
 
-    this._showResidentContent('jake', jake.name, jake.backstory, e);
-    this._showResidentContent('eagle', grandma.name, grandma.backstory, e);
+    this._showResidentContent('jake', this.#jake.name, this.#jake.backstory, e);
+    this._showResidentContent(
+      'eagle',
+      this.#grandma.name,
+      this.#grandma.backstory,
+      e
+    );
+    this._showResidentContent('weed', this.#mike.name, this.#mike.backstory, e);
   }
 
   _showResidentContent(iconName, name, backstory, e) {
