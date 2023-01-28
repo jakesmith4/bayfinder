@@ -35,13 +35,16 @@ const App = class {
     // Load Icons
     this._loadIcons();
 
+    // EVENT LISTENERS
     // Show Current Resident Data
-    // this._showCurrentResidentData();
-
+    // On Regular Javascript Click Event
     mapElement.addEventListener(
       'click',
       this._showCurrentResidentData.bind(this)
     );
+
+    // On Map Event
+    map.on('click', this._getCurrentPosition.bind(this));
   }
 
   _loadMap() {
@@ -92,13 +95,6 @@ const App = class {
   }
 
   _showCurrentResidentData(e) {
-    // On Map
-    map.on('click', function (mapE) {
-      const { lat, lng } = mapE.latlng;
-      console.log(lat, lng);
-    });
-
-    // On Map Element
     if (!e.target.src) {
       residentContent.innerHTML = '';
       return;
@@ -119,6 +115,11 @@ const App = class {
         </p>
         `;
     }
+  }
+
+  _getCurrentPosition(mapE) {
+    const { lat, lng } = mapE.latlng;
+    console.log(lat, lng);
   }
 };
 
