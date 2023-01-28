@@ -19,15 +19,14 @@ const grandma = {
   coords: [33.055659303435746, -95.24678425841024],
 };
 
-const bayLatitude = 33.0514234;
-const bayLongitude = -95.246532;
-const bayCoords = [bayLatitude, bayLongitude];
-const map = L.map('map').setView(bayCoords, 15);
 const residentContent = document.querySelector('.resident-content');
 
 const mapElement = document.getElementById('map');
 
 const App = class {
+  #bayCoords = [33.0514234, -95.246532];
+  #map = L.map('map').setView(this.#bayCoords, 15);
+
   constructor() {
     // Load Map
     this._loadMap();
@@ -44,7 +43,7 @@ const App = class {
     );
 
     // On Map Event
-    map.on('click', this._getCurrentPosition.bind(this));
+    this.#map.on('click', this._getCurrentPosition.bind(this));
   }
 
   _loadMap() {
@@ -53,7 +52,7 @@ const App = class {
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    }).addTo(this.#map);
   }
 
   _loadIcons() {
@@ -83,7 +82,7 @@ const App = class {
 
   _setMarker(coords, residentIcon, residentName) {
     L.marker(coords, { icon: residentIcon })
-      .addTo(map)
+      .addTo(this.#map)
       .bindPopup(
         L.popup({
           maxWidth: 250,
