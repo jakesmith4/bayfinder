@@ -36,7 +36,12 @@ const App = class {
     this._loadIcons();
 
     // Show Current Resident Data
-    this._showCurrentResidentData();
+    // this._showCurrentResidentData();
+
+    mapElement.addEventListener(
+      'click',
+      this._showCurrentResidentData.bind(this)
+    );
   }
 
   _loadMap() {
@@ -86,7 +91,7 @@ const App = class {
       .setPopupContent(residentName);
   }
 
-  _showCurrentResidentData() {
+  _showCurrentResidentData(e) {
     // On Map
     map.on('click', function (mapE) {
       const { lat, lng } = mapE.latlng;
@@ -94,28 +99,26 @@ const App = class {
     });
 
     // On Map Element
-    mapElement.addEventListener('click', function (e) {
-      if (!e.target.src) {
-        residentContent.innerHTML = '';
-        return;
-      }
+    if (!e.target.src) {
+      residentContent.innerHTML = '';
+      return;
+    }
 
-      const showResidentContent = function (iconName, name, backstory) {
-        if (e.target.src.includes(iconName)) {
-          console.log(iconName);
-          residentContent.innerHTML = `
+    this._showResidentContent('jake', jake.name, jake.backstory, e);
+    this._showResidentContent('eagle', grandma.name, grandma.backstory, e);
+  }
+
+  _showResidentContent(iconName, name, backstory, e) {
+    if (e.target.src.includes(iconName)) {
+      console.log(iconName);
+      residentContent.innerHTML = `
         <h2>Resident: ${name}</h2>
         <h3>Residents Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
         </p>
         `;
-        }
-      };
-
-      showResidentContent('jake', jake.name, jake.backstory);
-      showResidentContent('eagle', grandma.name, grandma.backstory);
-    });
+    }
   }
 };
 
