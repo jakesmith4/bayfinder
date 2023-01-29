@@ -2,6 +2,7 @@
 
 const residentContent = document.querySelector('.resident-content');
 const mapElement = document.getElementById('map');
+const allResidents = [];
 
 const Resident = class {
   constructor(name, backstory, latitude, longitude) {
@@ -11,10 +12,16 @@ const Resident = class {
     this.latitude = latitude;
     this.longitude = longitude;
     this.createCoords();
+    this.addResidentToArray();
   }
 
   createCoords() {
     this.coords = [this.latitude, this.longitude];
+  }
+
+  addResidentToArray() {
+    allResidents.push(this);
+    console.log(allResidents);
   }
 };
 
@@ -24,7 +31,7 @@ const App = class {
   #bayCoords = [33.0514234, -95.246532];
   #map = L.map('map').setView(this.#bayCoords, 15);
   #jake;
-  #grandma;
+  #marylou;
   #mike;
 
   constructor() {
@@ -63,14 +70,14 @@ const App = class {
 
   _loadIcons() {
     const jakeIcon = this._createIcon('./img/jake.png');
-    const grandmaIcon = this._createIcon('./img/eagle.png');
-    const mikeIcon = this._createIcon('./img/weed.png');
+    const grandmaIcon = this._createIcon('./img/marylou.png');
+    const mikeIcon = this._createIcon('./img/mike.png');
 
     // Jake
     this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
 
     // Grandma
-    this._setMarker(this.#grandma.coords, grandmaIcon, 'The Eagles Nest');
+    this._setMarker(this.#marylou.coords, grandmaIcon, 'The Eagles Nest');
 
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, 'Mikes Weed Shop');
@@ -150,9 +157,9 @@ const App = class {
     );
 
     // Grandma
-    this.#grandma = new Resident(
-      'Marry Lo Leffler',
-      'Mary Lo Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
+    this.#marylou = new Resident(
+      'Marylou Leffler',
+      'Marylou Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
       33.055659303435746,
       -95.24678425841024
     );
@@ -183,19 +190,32 @@ const App = class {
 
     // Grandma
     this._showResidentContent(
-      'eagle',
-      this.#grandma.name,
-      this.#grandma.backstory,
+      'marylou',
+      this.#marylou.name,
+      this.#marylou.backstory,
       e
     );
 
     // Mike
-    this._showResidentContent('weed', this.#mike.name, this.#mike.backstory, e);
+    this._showResidentContent('mike', this.#mike.name, this.#mike.backstory, e);
   }
 
   _showResidentContent(iconName, name, backstory, e, img) {
     if (e.target.src.includes(iconName)) {
-      console.log(iconName);
+      // Get Current Resident Being Clicked
+      const currentResident = allResidents.find(resident =>
+        resident.name.toLowerCase().includes(iconName.toLowerCase())
+      );
+
+      // Scroll To Current Resident
+      this.#map.setView(currentResident.coords, 18, {
+        animate: true,
+        pan: {
+          duration: 1,
+        },
+      });
+
+      // Show Current Resident Content
       residentContent.innerHTML = `
         <img src="${img}" alt="${iconName}" class="resident-content__img">
         <h2 class="resident-content__name">${name}</h2>
