@@ -182,7 +182,7 @@ const App = class {
     // Allen & Donnette
     this.#donnette_and_allen = new Resident(
       'donnette_and_allen',
-      'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin',
+      'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin up the street',
       33.05566230723349,
       -95.2463500509249
     );
@@ -213,14 +213,21 @@ const App = class {
     );
 
     // Mike
-    this._showResidentContent('mike', this.#mike.name, this.#mike.backstory, e);
+    this._showResidentContent(
+      'mike',
+      this.#mike.name,
+      this.#mike.backstory,
+      e,
+      './img/mike-headshot.jpg'
+    );
 
     // Allen & Donnette
     this._showResidentContent(
       'donnette_and_allen',
       this.#donnette_and_allen.name,
       this.#donnette_and_allen.backstory,
-      e
+      e,
+      './img/donnette_and_allen_headshot.jpg'
     );
   }
 
