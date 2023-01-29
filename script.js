@@ -193,7 +193,8 @@ const App = class {
       'marylou',
       this.#marylou.name,
       this.#marylou.backstory,
-      e
+      e,
+      './img/marylou-headshot.jpg'
     );
 
     // Mike
