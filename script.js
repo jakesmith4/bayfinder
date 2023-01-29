@@ -8,7 +8,6 @@ const Resident = class {
   constructor(name, backstory, latitude, longitude) {
     this.name = name;
     this.backstory = backstory;
-    // this.coords = coords;
     this.latitude = latitude;
     this.longitude = longitude;
     this.createCoords();
@@ -21,7 +20,6 @@ const Resident = class {
 
   addResidentToArray() {
     allResidents.push(this);
-    console.log(allResidents);
   }
 };
 
@@ -33,6 +31,7 @@ const App = class {
   #jake;
   #marylou;
   #mike;
+  #donnette_and_allen;
 
   constructor() {
     // Load Map
@@ -72,6 +71,7 @@ const App = class {
     const jakeIcon = this._createIcon('./img/jake.png');
     const grandmaIcon = this._createIcon('./img/marylou.png');
     const mikeIcon = this._createIcon('./img/mike.png');
+    const donnetteandallen = this._createIcon('./img/donnette_and_allen.png');
 
     // Jake
     this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
@@ -81,6 +81,13 @@ const App = class {
 
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, 'Mikes Weed Shop');
+
+    // Allen
+    this._setMarker(
+      this.#donnette_and_allen.coords,
+      donnetteandallen,
+      'Donnette & Allens'
+    );
   }
 
   _createIcon(iconSRC) {
@@ -171,6 +178,14 @@ const App = class {
       33.05522028915729,
       -95.24670727375302
     );
+
+    // Allen & Donnette
+    this.#donnette_and_allen = new Resident(
+      'donnette_and_allen',
+      'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin',
+      33.05566230723349,
+      -95.2463500509249
+    );
   }
 
   _showCurrentResidentData(e) {
@@ -199,6 +214,14 @@ const App = class {
 
     // Mike
     this._showResidentContent('mike', this.#mike.name, this.#mike.backstory, e);
+
+    // Allen & Donnette
+    this._showResidentContent(
+      'donnette_and_allen',
+      this.#donnette_and_allen.name,
+      this.#donnette_and_allen.backstory,
+      e
+    );
   }
 
   _showResidentContent(iconName, name, backstory, e, img) {
@@ -219,7 +242,7 @@ const App = class {
       // Show Current Resident Content
       residentContent.innerHTML = `
         <img src="${img}" alt="${iconName}" class="resident-content__img">
-        <h2 class="resident-content__name">${name}</h2>
+        <h2 class="resident-content__name">${name.replaceAll('_', ' ')}</h2>
         <h3 class="resident-content__backstory">Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
