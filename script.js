@@ -269,11 +269,11 @@ const App = class {
   }
 
   _showListResidentContent(e) {
-    const currentId = +e.target.closest('.single-resident').dataset.id;
+    const currentId = +e.target.closest('.single-resident')?.dataset.id;
 
     const currentResident = this._findCurrentResident(currentId);
 
-    if (currentId !== currentResident.id) return;
+    if (currentId !== currentResident?.id) return;
 
     // Close List View
     listViewContent.classList.add('toggle-show');
@@ -355,8 +355,4 @@ listViewBtn.addEventListener('click', function (e) {
   residentContent.innerHTML = '';
   copyrightElement.style.display = 'none';
   listViewContent.classList.toggle('toggle-show');
-});
-
-listViewContent.addEventListener('click', function (e) {
-  console.log(e.target.closest('.single-resident'));
 });
