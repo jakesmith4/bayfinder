@@ -256,6 +256,7 @@ const App = class {
   _showCurrentResidentData(e) {
     if (!e.target.src) {
       residentContent.innerHTML = '';
+      listViewContent.classList.add('toggle-show');
       return;
     }
 
