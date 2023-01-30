@@ -87,7 +87,7 @@ const App = class {
   }
 
   _loadMap() {
-    L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
       maxZoom: 20,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       attribution:
@@ -241,7 +241,9 @@ const App = class {
       }" class="icon-img" />
       <h2 class="single-resident__title">${this._fixName(resident.name)}</h2>
       </div>
-      <img src="${resident.iconImg}" alt="${resident.name}" />
+      <img src="${resident.iconImg}" alt="${
+        resident.name
+      }" class="single-resident__icon-img" />
       </li>`;
       listViewContent.insertAdjacentHTML('beforeend', html);
     });
