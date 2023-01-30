@@ -2,14 +2,28 @@
 
 const residentContent = document.querySelector('.resident-content');
 const mapElement = document.getElementById('map');
+const listViewContent = document.querySelector('.list-view-content');
 const allResidents = [];
 
 const Resident = class {
-  constructor(name, backstory, latitude, longitude) {
+  constructor(
+    name,
+    popupName,
+    backstory,
+    latitude,
+    longitude,
+    headshotImg,
+    iconImg,
+    id
+  ) {
     this.name = name;
+    this.popupName = popupName;
     this.backstory = backstory;
     this.latitude = latitude;
     this.longitude = longitude;
+    this.headshotImg = headshotImg;
+    this.iconImg = iconImg;
+    this.id = id;
     this.createCoords();
     this.addResidentToArray();
   }
@@ -47,15 +61,21 @@ const App = class {
     this._loadIcons();
 
     // EVENT LISTENERS
-    // Show Current Resident Data
+    // Show Current Resident Data On Icon Click
     // On Regular Javascript Click Event
     mapElement.addEventListener(
       'click',
       this._showCurrentResidentData.bind(this)
     );
 
-    // On Map Event
+    // On Map Event On Click
     this.#map.on('click', this._getMapClickCoords.bind(this));
+
+    // Show List View Content On Click
+    listViewContent.addEventListener(
+      'click',
+      this._showListResidentContent.bind(this)
+    );
   }
 
   _loadMap() {
@@ -68,10 +88,10 @@ const App = class {
   }
 
   _loadIcons() {
-    const jakeIcon = this._createIcon('./img/jake.png');
-    const grandmaIcon = this._createIcon('./img/marylou.png');
-    const mikeIcon = this._createIcon('./img/mike.png');
-    const donnetteandallen = this._createIcon('./img/donnette_and_allen.png');
+    const jakeIcon = this._createIcon(this.#jake.iconImg);
+    const grandmaIcon = this._createIcon(this.#marylou.iconImg);
+    const mikeIcon = this._createIcon(this.#mike.iconImg);
+    const donnetteandallen = this._createIcon(this.#donnette_and_allen.iconImg);
 
     // Jake
     this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
@@ -155,36 +175,52 @@ const App = class {
   }
 
   _createResidents() {
+    // Allen & Donnette
+    this.#donnette_and_allen = new Resident(
+      'donnette_and_allen',
+      'Donnette & Allens',
+      'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin up the street',
+      33.05566230723349,
+      -95.2463500509249,
+      './img/donnette_and_allen_headshot.jpg',
+      './img/donnette_and_allen.png',
+      0
+    );
+
     // Jake
     this.#jake = new Resident(
+      'jake smith',
       'Jake Smith',
       'Jake Smith is a programmer and is currently employed at J&J Saftey Floor. He Has big dreams of one day becoming a real professional developer',
       33.055495388400004,
-      -95.24646195841026
+      -95.24646195841026,
+      './img/jake-headshot.jpg',
+      './img/jake.png',
+      1
     );
 
     // Grandma
     this.#marylou = new Resident(
-      'Marylou Leffler',
+      'marylou leffler',
+      'The Eagles Nest',
       'Marylou Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
       33.055659303435746,
-      -95.24678425841024
+      -95.24678425841024,
+      './img/marylou-headshot.jpg',
+      './img/marylou.png',
+      2
     );
 
     // Mike
     this.#mike = new Resident(
-      'Mike',
+      'mike',
+      'Mikes Weed Shop',
       'Mike is the weed dealer of the bay, anytime you need some good smoke, this is where you go. Good bud for good prices!!',
       33.05522028915729,
-      -95.24670727375302
-    );
-
-    // Allen & Donnette
-    this.#donnette_and_allen = new Resident(
-      'donnette_and_allen',
-      'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin up the street',
-      33.05566230723349,
-      -95.2463500509249
+      -95.24670727375302,
+      './img/mike-headshot.jpg',
+      './img/mike.png',
+      3
     );
   }
 
@@ -195,67 +231,101 @@ const App = class {
     }
 
     // Jake
-    this._showResidentContent(
-      'jake',
-      this.#jake.name,
-      this.#jake.backstory,
-      e,
-      './img/jake-headshot.jpg'
-    );
+    this._showResidentContent('jake', e, this.#jake.id);
 
     // Grandma
-    this._showResidentContent(
-      'marylou',
-      this.#marylou.name,
-      this.#marylou.backstory,
-      e,
-      './img/marylou-headshot.jpg'
-    );
+    this._showResidentContent('marylou', e, this.#marylou.id);
 
     // Mike
-    this._showResidentContent(
-      'mike',
-      this.#mike.name,
-      this.#mike.backstory,
-      e,
-      './img/mike-headshot.jpg'
-    );
+    this._showResidentContent('mike', e, this.#mike.id);
 
     // Allen & Donnette
     this._showResidentContent(
       'donnette_and_allen',
-      this.#donnette_and_allen.name,
-      this.#donnette_and_allen.backstory,
       e,
-      './img/donnette_and_allen_headshot.jpg'
+      this.#donnette_and_allen.id
     );
   }
 
-  _showResidentContent(iconName, name, backstory, e, img) {
-    if (e.target.src.includes(iconName)) {
-      // Get Current Resident Being Clicked
-      const currentResident = allResidents.find(resident =>
-        resident.name.toLowerCase().includes(iconName.toLowerCase())
-      );
+  _showResidentContent(name, e, id) {
+    if (!e.target.src.includes(name)) return;
 
-      // Scroll To Current Resident
-      this.#map.setView(currentResident.coords, 18, {
-        animate: true,
-        pan: {
-          duration: 1,
-        },
-      });
+    // Remove List View Content
+    listViewContent.classList.add('toggle-show');
 
-      // Show Current Resident Content
-      residentContent.innerHTML = `
-        <img src="${img}" alt="${iconName}" class="resident-content__img">
-        <h2 class="resident-content__name">${name.replaceAll('_', ' ')}</h2>
+    // Get Current Resident Being Clicked
+    const currentResident = this._findCurrentResident(id);
+    console.log(currentResident.name);
+
+    // Scroll To Current Resident
+    this._scrollToCurrentResident(currentResident.coords);
+
+    // Show Current Resident Content
+    this._showCurrentResidentContent(
+      currentResident.headshotImg,
+      this._fixName(currentResident.name),
+      currentResident.backstory
+    );
+  }
+
+  _showListResidentContent(e) {
+    const currentId = +e.target.closest('.single-resident').dataset.id;
+
+    const currentResident = this._findCurrentResident(currentId);
+
+    if (currentId !== currentResident.id) return;
+
+    // Close List View
+    listViewContent.classList.add('toggle-show');
+
+    // Show Current Resident Content
+    this._showCurrentResidentContent(
+      currentResident.headshotImg,
+      this._fixName(currentResident.name),
+      currentResident.backstory
+    );
+
+    // Set Popup Content
+    L.popup({
+      maxWidth: 250,
+      minWidth: 100,
+      className: 'resident-popup',
+      offset: [10, 17],
+    })
+      .setLatLng(currentResident.coords)
+      .setContent(currentResident.popupName)
+      .openOn(this.#map);
+
+    // Scroll To Current Resident
+    this._scrollToCurrentResident(currentResident.coords);
+  }
+
+  _findCurrentResident(id) {
+    return allResidents.find(resident => resident.id == id);
+  }
+
+  _scrollToCurrentResident(coords) {
+    this.#map.setView(coords, 18, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+  }
+
+  _showCurrentResidentContent(img, name, backstory) {
+    residentContent.innerHTML = `
+        <img src="${img}" alt="${name}" class="resident-content__img">
+        <h2 class="resident-content__name">${name}</h2>
         <h3 class="resident-content__backstory">Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
         </p>
         `;
-    }
+  }
+
+  _fixName(name) {
+    return name.replaceAll('_', ' ').replaceAll('and', '&');
   }
 
   _getMapClickCoords(mapE) {
@@ -265,3 +335,28 @@ const App = class {
 };
 
 const app = new App();
+
+const listViewBtn = document.querySelector('.list-view-btn');
+const copyrightElement = document.querySelector('.copyright');
+
+allResidents.forEach(resident => {
+  const html = `<li class="single-resident" data-id="${resident.id}">
+  <div class="single-resident__content">
+  <img src="${resident.headshotImg}" alt="${resident.name}" class="icon-img" />
+  <h2 class="single-resident__title">${resident.name.replaceAll('_', ' ')}</h2>
+  </div>
+  <img src="${resident.iconImg}" alt="${resident.name}" />
+  </li>`;
+  listViewContent.insertAdjacentHTML('beforeend', html);
+});
+
+listViewBtn.addEventListener('click', function (e) {
+  console.log(allResidents);
+  residentContent.innerHTML = '';
+  copyrightElement.style.display = 'none';
+  listViewContent.classList.toggle('toggle-show');
+});
+
+listViewContent.addEventListener('click', function (e) {
+  console.log(e.target.closest('.single-resident'));
+});
