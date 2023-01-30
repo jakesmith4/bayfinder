@@ -3,6 +3,8 @@
 const residentContent = document.querySelector('.resident-content');
 const mapElement = document.getElementById('map');
 const listViewContent = document.querySelector('.list-view-content');
+const listViewBtn = document.querySelector('.list-view-btn');
+const copyrightElement = document.querySelector('.copyright');
 const allResidents = [];
 
 const Resident = class {
@@ -59,6 +61,9 @@ const App = class {
 
     // Load Icons
     this._loadIcons();
+
+    // Create List View
+    this._createListView();
 
     // EVENT LISTENERS
     // Show Current Resident Data On Icon Click
@@ -224,6 +229,21 @@ const App = class {
     );
   }
 
+  _createListView() {
+    allResidents.forEach(resident => {
+      const html = `<li class="single-resident" data-id="${resident.id}">
+      <div class="single-resident__content">
+      <img src="${resident.headshotImg}" alt="${
+        resident.name
+      }" class="icon-img" />
+      <h2 class="single-resident__title">${this._fixName(resident.name)}</h2>
+      </div>
+      <img src="${resident.iconImg}" alt="${resident.name}" />
+      </li>`;
+      listViewContent.insertAdjacentHTML('beforeend', html);
+    });
+  }
+
   _showCurrentResidentData(e) {
     if (!e.target.src) {
       residentContent.innerHTML = '';
@@ -335,20 +355,6 @@ const App = class {
 };
 
 const app = new App();
-
-const listViewBtn = document.querySelector('.list-view-btn');
-const copyrightElement = document.querySelector('.copyright');
-
-allResidents.forEach(resident => {
-  const html = `<li class="single-resident" data-id="${resident.id}">
-  <div class="single-resident__content">
-  <img src="${resident.headshotImg}" alt="${resident.name}" class="icon-img" />
-  <h2 class="single-resident__title">${resident.name.replaceAll('_', ' ')}</h2>
-  </div>
-  <img src="${resident.iconImg}" alt="${resident.name}" />
-  </li>`;
-  listViewContent.insertAdjacentHTML('beforeend', html);
-});
 
 listViewBtn.addEventListener('click', function (e) {
   console.log(allResidents);
