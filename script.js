@@ -81,6 +81,9 @@ const App = class {
       'click',
       this._showListResidentContent.bind(this)
     );
+
+    // Toggle List View
+    listViewBtn.addEventListener('click', this._toggleListView.bind(this));
   }
 
   _loadMap() {
@@ -244,6 +247,12 @@ const App = class {
     });
   }
 
+  _toggleListView() {
+    residentContent.innerHTML = '';
+    copyrightElement.style.display = 'none';
+    listViewContent.classList.toggle('toggle-show');
+  }
+
   _showCurrentResidentData(e) {
     if (!e.target.src) {
       residentContent.innerHTML = '';
@@ -355,10 +364,3 @@ const App = class {
 };
 
 const app = new App();
-
-listViewBtn.addEventListener('click', function (e) {
-  console.log(allResidents);
-  residentContent.innerHTML = '';
-  copyrightElement.style.display = 'none';
-  listViewContent.classList.toggle('toggle-show');
-});
