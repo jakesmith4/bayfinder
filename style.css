@@ -56,6 +56,18 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+.sidebar:-webkit-scrollbar {
+  width: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    max-height: 100%;
+  }
 }
 
 .bayfinder {
@@ -120,12 +132,18 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
-  padding: 0.75rem 3.75rem;
+  padding: 0.4rem 1rem;
   cursor: pointer;
   background: white;
   transition: all 0.3s linear;
   color: var(--color-brand--2);
   font-weight: bold;
+}
+
+@media screen and (min-width: 576px) {
+  .list-view-btn {
+    padding: 0.75rem 3.75rem;
+  }
 }
 
 .list-view-btn:hover {
@@ -150,6 +168,7 @@ body {
   cursor: pointer;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
