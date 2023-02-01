@@ -47,7 +47,8 @@ const App = class {
   #jake;
   #marylou;
   #mike;
-  #donnette_and_allen;
+  #donnette_Allen;
+  #poolHouse;
 
   constructor() {
     // Load Map
@@ -99,22 +100,30 @@ const App = class {
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const grandmaIcon = this._createIcon(this.#marylou.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
-    const donnetteandallen = this._createIcon(this.#donnette_and_allen.iconImg);
+    const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
+    const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
 
     // Jake
-    this._setMarker(this.#jake.coords, jakeIcon, 'Jake Smith');
+    this._setMarker(this.#jake.coords, jakeIcon, this.#jake.popupName);
 
     // Grandma
-    this._setMarker(this.#marylou.coords, grandmaIcon, 'The Eagles Nest');
+    this._setMarker(this.#marylou.coords, grandmaIcon, this.#marylou.popupName);
 
     // Mike
-    this._setMarker(this.#mike.coords, mikeIcon, 'Mikes Weed Shop');
+    this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
 
-    // Allen
+    // Allen & Donnette
     this._setMarker(
-      this.#donnette_and_allen.coords,
+      this.#donnette_Allen.coords,
       donnetteandallen,
-      'Donnette & Allens'
+      this.#donnette_Allen.popupName
+    );
+
+    // Pool House
+    this._setMarker(
+      this.#poolHouse.coords,
+      poolhouseIcon,
+      this.#poolHouse.popupName
     );
   }
 
@@ -184,9 +193,9 @@ const App = class {
 
   _createResidents() {
     // Allen & Donnette
-    this.#donnette_and_allen = new Resident(
+    this.#donnette_Allen = new Resident(
       'donnette_and_allen',
-      'Donnette & Allens',
+      'Donnette & Allen',
       'Donnete & Allen are relatively new residents to the bay, even though they have been coming out here for over 20 years. They recently moved in & built a cabin. Allen Smith is the builder and is also the prould builder of John Joiners cabin up the street',
       33.05566230723349,
       -95.2463500509249,
@@ -212,8 +221,8 @@ const App = class {
       'marylou leffler',
       'The Eagles Nest',
       'Marylou Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
-      33.055659303435746,
-      -95.24678425841024,
+      33.055680272582414,
+      -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
       2
@@ -224,11 +233,22 @@ const App = class {
       'mike',
       'Mikes Weed Shop',
       'Mike is the weed dealer of the bay, anytime you need some good smoke, this is where you go. Good bud for good prices!!',
-      33.05522028915729,
-      -95.24670727375302,
+      33.05543531164023,
+      -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
       3
+    );
+
+    this.#poolHouse = new Resident(
+      'pool_house',
+      'The Pool House',
+      'This is the bay pool house. It is open in the summer from May and Closes in September every year. Come here if you want to enjoy a nice swim, or maybe just to get a tan!',
+      33.056714261926324,
+      -95.24612013142432,
+      './img/question-mark.jpg',
+      './img/pool_house.png',
+      4
     );
   }
 
@@ -272,11 +292,10 @@ const App = class {
     this._showResidentContent('mike', e, this.#mike.id);
 
     // Allen & Donnette
-    this._showResidentContent(
-      'donnette_and_allen',
-      e,
-      this.#donnette_and_allen.id
-    );
+    this._showResidentContent('donnette_and_allen', e, this.#donnette_Allen.id);
+
+    // Pool House
+    this._showResidentContent('pool_house', e, this.#poolHouse.id);
   }
 
   _showResidentContent(name, e, id) {

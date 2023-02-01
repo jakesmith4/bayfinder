@@ -55,7 +55,6 @@ body {
   padding: 3rem 5rem;
   display: flex;
   flex-direction: column;
-  position: relative;
   max-height: 50vh;
   overflow-y: scroll;
 }
@@ -74,7 +73,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
 .bayfinder__heading {
@@ -128,9 +126,9 @@ body {
 }
 
 .list-view-btn {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  top: 2.45rem;
+  left: 2.45rem;
   z-index: 2;
   padding: 0.4rem 1rem;
   cursor: pointer;
