@@ -33,7 +33,8 @@ body {
   overscroll-behavior-y: none;
 
   background-color: #fff;
-  padding: 2.5rem;
+  padding: 2rem;
+  padding-bottom: 0;
 
   display: flex;
   flex-direction: column;
@@ -42,6 +43,7 @@ body {
 @media screen and (min-width: 768px) {
   body {
     flex-direction: row;
+    padding-bottom: 2rem;
   }
 }
 
