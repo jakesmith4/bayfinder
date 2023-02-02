@@ -44,10 +44,11 @@ const Resident = class {
 const App = class {
   #bayCoords = [33.0514234, -95.246532];
   #map = L.map('map').setView(this.#bayCoords, 15);
+  #donnette_Allen;
   #jake;
+  #john;
   #marylou;
   #mike;
-  #donnette_Allen;
   #poolHouse;
 
   constructor() {
@@ -98,6 +99,7 @@ const App = class {
 
   _loadIcons() {
     const jakeIcon = this._createIcon(this.#jake.iconImg);
+    const johnIcon = this._createIcon(this.#john.iconImg);
     const grandmaIcon = this._createIcon(this.#marylou.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
@@ -125,6 +127,9 @@ const App = class {
       poolhouseIcon,
       this.#poolHouse.popupName
     );
+
+    // John Joyner
+    this._setMarker(this.#john.coords, johnIcon, this.#john.popupName);
   }
 
   _createIcon(iconSRC) {
@@ -216,16 +221,28 @@ const App = class {
       1
     );
 
+    // John Joyner
+    this.#john = new Resident(
+      'john joyner',
+      'John Joyner',
+      'John Joyner is the proud owner of J&J Safety Floor. He is also proud to announce the coming of his new place, the Joyner Cabin.  John has lived in the bay for over 20 years.',
+      33.05622434091173,
+      -95.2470067467671,
+      './img/john-joyner-headshot.jpg',
+      './img/john.png',
+      2
+    );
+
     // Grandma
     this.#marylou = new Resident(
       'marylou leffler',
       'The Eagles Nest',
-      'Marylou Leffler is the grandmother of Jake Smith and Josh Leffer. She is also the mother of Donnette & Allen Smith. Marry Lo has lived in the bay for over 20 years',
+      'Marylou Leffler is a proud resident of the bay. Her place is called "The Eagles Nest" because it has a karaoke bar attached to it. She is proud mother of Donnette & Allen Smith. Marrylou has lived in the bay for over 20 years',
       33.055680272582414,
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      2
+      3
     );
 
     // Mike
@@ -237,7 +254,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      3
+      4
     );
 
     this.#poolHouse = new Resident(
@@ -246,9 +263,9 @@ const App = class {
       'This is the bay pool house. It is open in the summer from May and Closes in September every year. Come here if you want to enjoy a nice swim, or maybe just to get a tan!',
       33.056714261926324,
       -95.24612013142432,
-      './img/question-mark.jpg',
+      './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      4
+      5
     );
   }
 
@@ -296,6 +313,9 @@ const App = class {
 
     // Pool House
     this._showResidentContent('pool_house', e, this.#poolHouse.id);
+
+    // John Joyner
+    this._showResidentContent('john', e, this.#john.id);
   }
 
   _showResidentContent(name, e, id) {
