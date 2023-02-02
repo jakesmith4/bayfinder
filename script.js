@@ -1,5 +1,8 @@
 'use strict';
 
+const bayfinderIcon = document.querySelector('.bayfinder__icon');
+const smallBayIcon = 'fa-3x';
+const largeBayIcon = 'fa-5x';
 const residentContent = document.querySelector('.resident-content');
 const mapElement = document.getElementById('map');
 const listViewContent = document.querySelector('.list-view-content');
@@ -290,12 +293,36 @@ const App = class {
     residentContent.innerHTML = '';
     copyrightElement.style.display = 'none';
     listViewContent.classList.toggle('toggle-show');
+
+    // Toggle Bay Icon Size
+
+    if (
+      residentContent.innerHTML === '' ||
+      listViewContent.classList.contains('toggle-show')
+    ) {
+      this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
+    }
+    if (
+      residentContent.innerHTML !== '' ||
+      !listViewContent.classList.contains('toggle-show')
+    ) {
+      this._changeBayfinderIconSize(largeBayIcon, smallBayIcon);
+    }
+  }
+
+  _changeBayfinderIconSize(removeClass, addClass) {
+    // Make Bay Finder Icon Smaller
+    bayfinderIcon.classList.remove(removeClass);
+    bayfinderIcon.classList.add(addClass);
   }
 
   _showCurrentResidentData(e) {
     if (!e.target.src) {
       residentContent.innerHTML = '';
       listViewContent.classList.add('toggle-show');
+
+      // Make Bay Finder Icon Smaller
+      this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
       return;
     }
 
@@ -324,6 +351,9 @@ const App = class {
     // Remove List View Content
     listViewContent.classList.add('toggle-show');
 
+    // Make Bay Finder Icon Smaller
+    this._changeBayfinderIconSize(largeBayIcon, smallBayIcon);
+
     // Get Current Resident Being Clicked
     const currentResident = this._findCurrentResident(id);
     console.log(currentResident.name);
@@ -348,6 +378,9 @@ const App = class {
 
     // Close List View
     listViewContent.classList.add('toggle-show');
+
+    // Make Bayfinder Icon Size Smaller
+    this._changeBayfinderIconSize(largeBayIcon, smallBayIcon);
 
     // Show Current Resident Content
     this._showCurrentResidentContent(
