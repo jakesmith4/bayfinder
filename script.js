@@ -47,6 +47,7 @@ const Resident = class {
 const App = class {
   #bayCoords = [33.0514234, -95.246532];
   #map = L.map('map').setView(this.#bayCoords, 15);
+  #dock;
   #donnette_Allen;
   #jake;
   #john;
@@ -101,21 +102,16 @@ const App = class {
   }
 
   _loadIcons() {
+    const dockIcon = this._createIcon(this.#dock.iconImg);
+    const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
+    const grandmaIcon = this._createIcon(this.#marylou.iconImg);
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const johnIcon = this._createIcon(this.#john.iconImg);
-    const grandmaIcon = this._createIcon(this.#marylou.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
-    const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
 
-    // Jake
-    this._setMarker(this.#jake.coords, jakeIcon, this.#jake.popupName);
-
-    // Grandma
-    this._setMarker(this.#marylou.coords, grandmaIcon, this.#marylou.popupName);
-
-    // Mike
-    this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
+    // Dock
+    this._setMarker(this.#dock.coords, dockIcon, this.#dock.popupName);
 
     // Allen & Donnette
     this._setMarker(
@@ -124,15 +120,24 @@ const App = class {
       this.#donnette_Allen.popupName
     );
 
+    // Grandma
+    this._setMarker(this.#marylou.coords, grandmaIcon, this.#marylou.popupName);
+
+    // Jake
+    this._setMarker(this.#jake.coords, jakeIcon, this.#jake.popupName);
+
+    // John Joyner
+    this._setMarker(this.#john.coords, johnIcon, this.#john.popupName);
+
+    // Mike
+    this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
+
     // Pool House
     this._setMarker(
       this.#poolHouse.coords,
       poolhouseIcon,
       this.#poolHouse.popupName
     );
-
-    // John Joyner
-    this._setMarker(this.#john.coords, johnIcon, this.#john.popupName);
   }
 
   _createIcon(iconSRC) {
@@ -200,6 +205,18 @@ const App = class {
   }
 
   _createResidents() {
+    // Dock
+    this.#dock = new Resident(
+      'dock',
+      'Dock / Boat Ramp',
+      'This is the boat ramp/dock of Pelican Bay. You can come down here to put your boat into the lake, or to simply go for a swim. Some residents of enjoy fishing from the dock',
+      33.04573731337109,
+      -95.24452633142468,
+      './img/dock-headshot.jpg',
+      './img/dock.png',
+      0
+    );
+
     // Allen & Donnette
     this.#donnette_Allen = new Resident(
       'donnette_and_allen',
@@ -209,7 +226,7 @@ const App = class {
       -95.2463500509249,
       './img/donnette_and_allen_headshot.jpg',
       './img/donnette_and_allen.png',
-      0
+      1
     );
 
     // Jake
@@ -221,7 +238,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
-      1
+      2
     );
 
     // John Joyner
@@ -233,7 +250,7 @@ const App = class {
       -95.2470067467671,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
-      2
+      3
     );
 
     // Grandma
@@ -245,7 +262,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      3
+      4
     );
 
     // Mike
@@ -257,7 +274,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      4
+      5
     );
 
     this.#poolHouse = new Resident(
@@ -268,7 +285,7 @@ const App = class {
       -95.24612013142432,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      5
+      6
     );
   }
 
@@ -326,23 +343,26 @@ const App = class {
       return;
     }
 
-    // Jake
-    this._showResidentContent('jake', e, this.#jake.id);
-
-    // Grandma
-    this._showResidentContent('marylou', e, this.#marylou.id);
-
-    // Mike
-    this._showResidentContent('mike', e, this.#mike.id);
+    // Dock
+    this._showResidentContent('dock', e, this.#dock.id);
 
     // Allen & Donnette
     this._showResidentContent('donnette_and_allen', e, this.#donnette_Allen.id);
 
-    // Pool House
-    this._showResidentContent('pool_house', e, this.#poolHouse.id);
+    // Grandma
+    this._showResidentContent('marylou', e, this.#marylou.id);
+
+    // Jake
+    this._showResidentContent('jake', e, this.#jake.id);
 
     // John Joyner
     this._showResidentContent('john', e, this.#john.id);
+
+    // Mike
+    this._showResidentContent('mike', e, this.#mike.id);
+
+    // Pool House
+    this._showResidentContent('pool_house', e, this.#poolHouse.id);
   }
 
   _showResidentContent(name, e, id) {
