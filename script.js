@@ -47,6 +47,7 @@ const Resident = class {
 const App = class {
   #bayCoords = [33.0514234, -95.246532];
   #map = L.map('map').setView(this.#bayCoords, 15);
+  #autum;
   #bobbySue;
   #dock;
   #donnette_Allen;
@@ -103,6 +104,7 @@ const App = class {
   }
 
   _loadIcons() {
+    const autumIcon = this._createIcon(this.#autum.iconImg);
     const bobbySueIcon = this._createIcon(this.#bobbySue.iconImg);
     const dockIcon = this._createIcon(this.#dock.iconImg);
     const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
@@ -111,6 +113,9 @@ const App = class {
     const johnIcon = this._createIcon(this.#john.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
+
+    // Autum Chree
+    this._setMarker(this.#autum.coords, autumIcon, this.#autum.popupName);
 
     // Bobby Sue
     this._setMarker(
@@ -214,6 +219,18 @@ const App = class {
   }
 
   _createResidents() {
+    // Autum Chree
+    this.#autum = new Resident(
+      'autum',
+      'Autum Chree',
+      'Autum has been in the bay for quite some time, however she is proud to annouce the recent acquiring of her new place. Autum works as a caregiver, and has a big heart. She essentially is a life saver/medicine healer',
+      33.054615,
+      -95.247085,
+      './img/autum-headshot.jpg',
+      './img/autum.png',
+      0
+    );
+
     // Bobby Sue
     this.#bobbySue = new Resident(
       'bobby_sue',
@@ -223,7 +240,7 @@ const App = class {
       -95.2458594025887,
       './img/bobby-sue-headshot.jpg',
       './img/bobby_sue.png',
-      0
+      1
     );
 
     // Dock
@@ -235,7 +252,7 @@ const App = class {
       -95.24452633142468,
       './img/dock-headshot.jpg',
       './img/dock.png',
-      1
+      2
     );
 
     // Allen & Donnette
@@ -247,7 +264,7 @@ const App = class {
       -95.2463500509249,
       './img/donnette_and_allen_headshot.jpg',
       './img/donnette_and_allen.png',
-      2
+      3
     );
 
     // Jake
@@ -259,7 +276,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
-      3
+      4
     );
 
     // John Joyner
@@ -271,7 +288,7 @@ const App = class {
       -95.2470067467671,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
-      4
+      5
     );
 
     // Grandma
@@ -283,7 +300,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      5
+      6
     );
 
     // Mike
@@ -295,7 +312,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      6
+      7
     );
 
     this.#poolHouse = new Resident(
@@ -306,7 +323,7 @@ const App = class {
       -95.24612013142432,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      7
+      8
     );
   }
 
@@ -363,6 +380,9 @@ const App = class {
       this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
       return;
     }
+
+    // Autum Chree
+    this._showResidentContent('autum', e, this.#autum.id);
 
     // Bobby Sue
     this._showResidentContent('bobby_sue', e, this.#bobbySue.id);
