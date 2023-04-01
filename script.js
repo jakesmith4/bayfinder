@@ -49,6 +49,7 @@ const App = class {
   #map = L.map('map').setView(this.#bayCoords, 15);
   #autum;
   #bobbySue;
+  #chris;
   #dock;
   #donnette_Allen;
   #jake;
@@ -106,6 +107,7 @@ const App = class {
   _loadIcons() {
     const autumIcon = this._createIcon(this.#autum.iconImg);
     const bobbySueIcon = this._createIcon(this.#bobbySue.iconImg);
+    const chrisIcon = this._createIcon(this.#chris.iconImg);
     const dockIcon = this._createIcon(this.#dock.iconImg);
     const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
     const grandmaIcon = this._createIcon(this.#marylou.iconImg);
@@ -123,6 +125,9 @@ const App = class {
       bobbySueIcon,
       this.#bobbySue.popupName
     );
+
+    // Chris (With The List)
+    this._setMarker(this.#chris.coords, chrisIcon, this.#chris.popupName);
 
     // Dock
     this._setMarker(this.#dock.coords, dockIcon, this.#dock.popupName);
@@ -243,6 +248,18 @@ const App = class {
       1
     );
 
+    // Chris (With The List)
+    this.#chris = new Resident(
+      'chris (with the list)',
+      'Chris (With The List)',
+      `Chris (With The List) has lived in the bay for a while now. He actually has a cabin on the back side of the bay by the dock. He has recently gained the name "Chris With The List", because he is said to have a list which contains appliances he sells for work. He has mentioned this list several times saying, "The list comes out next week", but we never see a list. Every time someone asks to buy some appliances, Chris says, "the list comes out next week". This is where Chris gets the name "Chris With The List"`,
+      33.04804126598009,
+      -95.2458038853963,
+      './img/chris-headshot.jpg',
+      './img/chris.png',
+      2
+    );
+
     // Dock
     this.#dock = new Resident(
       'dock',
@@ -252,7 +269,7 @@ const App = class {
       -95.24452633142468,
       './img/dock-headshot.jpg',
       './img/dock.png',
-      2
+      3
     );
 
     // Allen & Donnette
@@ -264,7 +281,7 @@ const App = class {
       -95.2463500509249,
       './img/donnette_and_allen_headshot.jpg',
       './img/donnette_and_allen.png',
-      3
+      4
     );
 
     // Jake
@@ -276,7 +293,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
-      4
+      5
     );
 
     // John Joyner
@@ -288,7 +305,7 @@ const App = class {
       -95.2470067467671,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
-      5
+      6
     );
 
     // Grandma
@@ -300,7 +317,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      6
+      7
     );
 
     // Mike
@@ -312,7 +329,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      7
+      8
     );
 
     this.#poolHouse = new Resident(
@@ -323,7 +340,7 @@ const App = class {
       -95.24612013142432,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      8
+      9
     );
   }
 
@@ -386,6 +403,9 @@ const App = class {
 
     // Bobby Sue
     this._showResidentContent('bobby_sue', e, this.#bobbySue.id);
+
+    // Chris (With The List)
+    this._showResidentContent('chris', e, this.#chris.id);
 
     // Dock
     this._showResidentContent('dock', e, this.#dock.id);
