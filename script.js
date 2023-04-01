@@ -57,6 +57,7 @@ const App = class {
   #marylou;
   #mike;
   #poolHouse;
+  #wayne_debbie;
 
   constructor() {
     // Load Map
@@ -115,6 +116,7 @@ const App = class {
     const johnIcon = this._createIcon(this.#john.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
+    const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
 
     // Autum Chree
     this._setMarker(this.#autum.coords, autumIcon, this.#autum.popupName);
@@ -156,6 +158,13 @@ const App = class {
       this.#poolHouse.coords,
       poolhouseIcon,
       this.#poolHouse.popupName
+    );
+
+    // Wayne & Debbie
+    this._setMarker(
+      this.#wayne_debbie.coords,
+      wayneAndDebbieIcon,
+      this.#wayne_debbie.popupName
     );
   }
 
@@ -332,6 +341,7 @@ const App = class {
       8
     );
 
+    // Poolhouse
     this.#poolHouse = new Resident(
       'pool_house',
       'The Pool House',
@@ -341,6 +351,18 @@ const App = class {
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
       9
+    );
+
+    // Wayne & Debbie
+    this.#wayne_debbie = new Resident(
+      'wayne_and_debbie',
+      'Wayne & Debbies Juke Joint',
+      'Wayne & Debbie have lived in the bay for a while now. They have a karaoke bar called Waynes Juke Joint. They are a very happy couple.',
+      33.054567657834,
+      -95.24584515017374,
+      './img/wayne-debbie-headshot.jpg',
+      './img/wayne_debbie.png',
+      10
     );
   }
 
@@ -427,6 +449,9 @@ const App = class {
 
     // Pool House
     this._showResidentContent('pool_house', e, this.#poolHouse.id);
+
+    // Wayne & Debbie
+    this._showResidentContent('wayne_debbie', e, this.#wayne_debbie.id);
   }
 
   _showResidentContent(name, e, id) {
