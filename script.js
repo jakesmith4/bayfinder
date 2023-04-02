@@ -52,13 +52,15 @@ const App = class {
   #chris;
   #dock;
   #donnette_Allen;
+  #henry;
   #jake;
   #john;
   #keth;
   #marylou;
   #mike;
-  #poolHouse;
   #patio;
+  #playground;
+  #poolHouse;
   #wayne_debbie;
 
   constructor() {
@@ -118,8 +120,9 @@ const App = class {
     const johnIcon = this._createIcon(this.#john.iconImg);
     const kethIcon = this._createIcon(this.#keth.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
-    const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
     const patioIcon = this._createIcon(this.#patio.iconImg);
+    const playgroundIcon = this._createIcon(this.#playground.iconImg);
+    const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
 
     // Autum Chree
@@ -160,15 +163,22 @@ const App = class {
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
 
+    // Patio
+    this._setMarker(this.#patio.coords, patioIcon, this.#patio.popupName);
+
+    // Playground
+    this._setMarker(
+      this.#playground.coords,
+      playgroundIcon,
+      this.#playground.popupName
+    );
+
     // Pool House
     this._setMarker(
       this.#poolHouse.coords,
       poolhouseIcon,
       this.#poolHouse.popupName
     );
-
-    // Patio
-    this._setMarker(this.#patio.coords, patioIcon, this.#patio.popupName);
 
     // Wayne & Debbie
     this._setMarker(
@@ -363,28 +373,40 @@ const App = class {
       9
     );
 
-    // Poolhouse
-    this.#poolHouse = new Resident(
-      'pool_house',
-      'The Pool House',
-      'This is the bay pool house. It is open in the summer from May and Closes in September every year. Come here if you want to enjoy a nice swim, or maybe just to get a tan!',
-      33.056714261926324,
-      -95.24612013142432,
-      './img/pool-house-headshot.jpg',
-      './img/pool_house.png',
-      10
-    );
-
     // Patio
     this.#patio = new Resident(
       'patio',
       'Patio Area',
       'This is the bay patio area, it is always open. This is where the board hosts there meetings. It has a lot of history behind it as it has always been there since the beginning of the bay.',
-      33.05653564695507,
-      -95.24591549427498,
+      33.05653452406172,
+      -95.24567796935563,
       './img/patio-headshot.jpg',
       './img/patio.png',
+      10
+    );
+
+    // Playground
+    this.#playground = new Resident(
+      'playground',
+      'The Playground',
+      `This is the playground of Pelican Bay. It is open all year round is it's a great place to bring your kids for a fun time!`,
+      33.05679540317317,
+      -95.2456499145124,
+      './img/playground-headshot.jpg',
+      './img/playground.png',
       11
+    );
+
+    // Poolhouse
+    this.#poolHouse = new Resident(
+      'pool_house',
+      'The Pool House',
+      'This is the bay pool house. It is open in the summer from May and Closes in September every year. Come here if you want to enjoy a nice swim, or maybe just to get a tan!',
+      33.05640218626491,
+      -95.24605216092242,
+      './img/pool-house-headshot.jpg',
+      './img/pool_house.png',
+      12
     );
 
     // Wayne & Debbie
@@ -396,7 +418,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
-      12
+      13
     );
   }
 
@@ -484,11 +506,14 @@ const App = class {
     // Mike
     this._showResidentContent('mike', e, this.#mike.id);
 
-    // Pool House
-    this._showResidentContent('pool_house', e, this.#poolHouse.id);
-
     // Patio
     this._showResidentContent('patio', e, this.#patio.id);
+
+    // Playground
+    this._showResidentContent('playground', e, this.#playground.id);
+
+    // Pool House
+    this._showResidentContent('pool_house', e, this.#poolHouse.id);
 
     // Wayne & Debbie
     this._showResidentContent('wayne_debbie', e, this.#wayne_debbie.id);
