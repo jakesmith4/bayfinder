@@ -7,6 +7,7 @@ const residentContent = document.querySelector('.resident-content');
 const mapElement = document.getElementById('map');
 const listViewContent = document.querySelector('.list-view-content');
 const listViewBtn = document.querySelector('.list-view-btn');
+const closeBtn = document.querySelector('.close-btn');
 const copyrightElement = document.querySelector('.copyright');
 const allResidents = [];
 
@@ -98,6 +99,9 @@ const App = class {
 
     // Toggle List View
     listViewBtn.addEventListener('click', this._toggleListView.bind(this));
+
+    // Hide Resident Info
+    closeBtn.addEventListener('click', this._hideResidentInfo.bind(this));
   }
 
   _loadMap() {
@@ -467,13 +471,24 @@ const App = class {
       listViewContent.classList.contains('toggle-show')
     ) {
       this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
+      closeBtn.classList.add('toggle-close-btn');
     }
     if (
       residentContent.innerHTML !== '' ||
       !listViewContent.classList.contains('toggle-show')
     ) {
       this._changeBayfinderIconSize(largeBayIcon, smallBayIcon);
+      closeBtn.classList.remove('toggle-close-btn');
     }
+  }
+
+  _hideResidentInfo() {
+    residentContent.innerHTML = '';
+    copyrightElement.style.display = 'none';
+    closeBtn.classList.add('toggle-close-btn');
+    listViewContent.classList.add('toggle-show');
+
+    this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
   }
 
   _changeBayfinderIconSize(removeClass, addClass) {
@@ -486,6 +501,9 @@ const App = class {
     if (!e.target.src) {
       residentContent.innerHTML = '';
       listViewContent.classList.add('toggle-show');
+
+      // Hide Close Btn
+      closeBtn.classList.add('toggle-close-btn');
 
       // Make Bay Finder Icon Smaller
       this._changeBayfinderIconSize(smallBayIcon, largeBayIcon);
@@ -540,6 +558,9 @@ const App = class {
 
   _showResidentContent(name, e, id) {
     if (!e.target.src.includes(name)) return;
+
+    // Show Close Btn
+    closeBtn.classList.remove('toggle-close-btn');
 
     // Remove List View Content
     listViewContent.classList.add('toggle-show');
