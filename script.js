@@ -56,6 +56,7 @@ const App = class {
   #henry;
   #jake;
   #john;
+  #kathy;
   #keth;
   #marylou;
   #mike;
@@ -123,6 +124,7 @@ const App = class {
     const henryIcon = this._createIcon(this.#henry.iconImg);
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const johnIcon = this._createIcon(this.#john.iconImg);
+    const kathyIcon = this._createIcon(this.#kathy.iconImg);
     const kethIcon = this._createIcon(this.#keth.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const patioIcon = this._createIcon(this.#patio.iconImg);
@@ -164,6 +166,9 @@ const App = class {
 
     // John Joyner
     this._setMarker(this.#john.coords, johnIcon, this.#john.popupName);
+
+    // Kathy
+    this._setMarker(this.#kathy.coords, kathyIcon, this.#kathy.popupName);
 
     // Keth
     this._setMarker(this.#keth.coords, kethIcon, this.#keth.popupName);
@@ -321,6 +326,18 @@ const App = class {
       4
     );
 
+    // Grandma
+    this.#marylou = new Resident(
+      'marylou leffler',
+      'The Eagles Nest',
+      'Marylou Leffler is a proud resident of the bay. Her place is called "The Eagles Nest" because it has a karaoke bar attached to it. She is proud mother of Donnette & Allen Smith. Marrylou has lived in the bay for over 20 years',
+      33.055680272582414,
+      -95.24690133142433,
+      './img/marylou-headshot.jpg',
+      './img/marylou.png',
+      5
+    );
+
     // Henry
     this.#henry = new Resident(
       'henry harrington',
@@ -330,7 +347,7 @@ const App = class {
       -95.24623657577489,
       './img/henry-headshot.jpg',
       './img/henry.png',
-      5
+      6
     );
 
     // Jake
@@ -342,7 +359,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
-      6
+      7
     );
 
     // John Joyner
@@ -354,7 +371,19 @@ const App = class {
       -95.24686400651956,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
-      7
+      8
+    );
+
+    // Kathy
+    this.#kathy = new Resident(
+      'kathy tuscana',
+      'Kathy Tuscana',
+      `Kathy has been in the bay for a while now. She own the well known dog named Chase. She is also the local barber/hair stylist. Go see her if you need a fresh cut.`,
+      33.05434057556904,
+      -95.24687291767464,
+      './img/kathy-headshot.jpg',
+      './img/kathy.png',
+      9
     );
 
     // Keth
@@ -366,19 +395,7 @@ const App = class {
       -95.2464644274927,
       './img/keth-headshot.jpg',
       './img/keth.png',
-      8
-    );
-
-    // Grandma
-    this.#marylou = new Resident(
-      'marylou leffler',
-      'The Eagles Nest',
-      'Marylou Leffler is a proud resident of the bay. Her place is called "The Eagles Nest" because it has a karaoke bar attached to it. She is proud mother of Donnette & Allen Smith. Marrylou has lived in the bay for over 20 years',
-      33.055680272582414,
-      -95.24690133142433,
-      './img/marylou-headshot.jpg',
-      './img/marylou.png',
-      9
+      10
     );
 
     // Mike
@@ -390,7 +407,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      10
+      11
     );
 
     // Patio
@@ -402,7 +419,7 @@ const App = class {
       -95.24567796935563,
       './img/patio-headshot.jpg',
       './img/patio.png',
-      11
+      12
     );
 
     // Playground
@@ -414,7 +431,7 @@ const App = class {
       -95.2456499145124,
       './img/playground-headshot.jpg',
       './img/playground.png',
-      12
+      13
     );
 
     // Poolhouse
@@ -426,7 +443,7 @@ const App = class {
       -95.24605216092242,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      13
+      14
     );
 
     // Wayne & Debbie
@@ -438,7 +455,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
-      14
+      15
     );
   }
 
@@ -464,8 +481,7 @@ const App = class {
     copyrightElement.style.display = 'none';
     listViewContent.classList.toggle('toggle-show');
 
-    // Toggle Bay Icon Size
-
+    // Toggle Bay Icon Size & Close Btn
     if (
       residentContent.innerHTML === '' ||
       listViewContent.classList.contains('toggle-show')
@@ -536,6 +552,9 @@ const App = class {
 
     // John Joyner
     this._showResidentContent('john', e, this.#john.id);
+
+    // Kathy
+    this._showResidentContent('kathy', e, this.#kathy.id);
 
     // Keth
     this._showResidentContent('keth', e, this.#keth.id);
