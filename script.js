@@ -20,6 +20,7 @@ const Resident = class {
     longitude,
     headshotImg,
     iconImg,
+    facebookUrl,
     id
   ) {
     this.name = name;
@@ -29,6 +30,7 @@ const Resident = class {
     this.longitude = longitude;
     this.headshotImg = headshotImg;
     this.iconImg = iconImg;
+    this.facebookUrl = facebookUrl;
     this.id = id;
     this.createCoords();
     this.addResidentToArray();
@@ -57,7 +59,7 @@ const App = class {
   #jake;
   #john;
   #kathy;
-  #keth;
+  #keith;
   #marylou;
   #mike;
   #patio;
@@ -125,7 +127,7 @@ const App = class {
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const johnIcon = this._createIcon(this.#john.iconImg);
     const kathyIcon = this._createIcon(this.#kathy.iconImg);
-    const kethIcon = this._createIcon(this.#keth.iconImg);
+    const keithIcon = this._createIcon(this.#keith.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const patioIcon = this._createIcon(this.#patio.iconImg);
     const playgroundIcon = this._createIcon(this.#playground.iconImg);
@@ -170,8 +172,8 @@ const App = class {
     // Kathy
     this._setMarker(this.#kathy.coords, kathyIcon, this.#kathy.popupName);
 
-    // Keth
-    this._setMarker(this.#keth.coords, kethIcon, this.#keth.popupName);
+    // Keith
+    this._setMarker(this.#keith.coords, keithIcon, this.#keith.popupName);
 
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
@@ -275,6 +277,7 @@ const App = class {
       -95.247085,
       './img/autum-headshot.jpg',
       './img/autum.png',
+      'https://www.facebook.com/autumn.cheree',
       0
     );
 
@@ -287,6 +290,7 @@ const App = class {
       -95.2458594025887,
       './img/bobby-sue-headshot.jpg',
       './img/bobby_sue.png',
+      'https://www.facebook.com/profile.php?id=100011277615384',
       1
     );
 
@@ -299,6 +303,7 @@ const App = class {
       -95.2458038853963,
       './img/chris-headshot.jpg',
       './img/chris.png',
+      'https://www.facebook.com/chris.bragg.18',
       2
     );
 
@@ -311,6 +316,7 @@ const App = class {
       -95.24452633142468,
       './img/dock-headshot.jpg',
       './img/dock.png',
+      null,
       3
     );
 
@@ -323,6 +329,7 @@ const App = class {
       -95.2463500509249,
       './img/donnette_and_allen_headshot.jpg',
       './img/donnette_and_allen.png',
+      'https://www.facebook.com/donnette.smith.54',
       4
     );
 
@@ -335,6 +342,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
+      'https://www.facebook.com/lefflermarylou',
       5
     );
 
@@ -347,6 +355,7 @@ const App = class {
       -95.24623657577489,
       './img/henry-headshot.jpg',
       './img/henry.png',
+      'https://www.facebook.com/henry.harrington.96',
       6
     );
 
@@ -359,6 +368,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
+      'https://www.facebook.com/profile.php?id=100000047980515',
       7
     );
 
@@ -371,6 +381,7 @@ const App = class {
       -95.24686400651956,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
+      null,
       8
     );
 
@@ -383,18 +394,20 @@ const App = class {
       -95.24687291767464,
       './img/kathy-headshot.jpg',
       './img/kathy.png',
+      'https://www.facebook.com/kathy.tuscana.9',
       9
     );
 
-    // Keth
-    this.#keth = new Resident(
-      'keth brasier',
-      'Keth Brasier',
-      'Keth Braser has been in the bay for over 3 years. He works as a truck driver delivering buildings and small homes. You can recognize his place because he has a tree that has been cut into a middle finger.',
+    // Keith
+    this.#keith = new Resident(
+      'keith brasier',
+      'Keith Brasier',
+      'Keith Braser has been in the bay for over 3 years. He works as a truck driver delivering buildings and small homes. You can recognize his place because he has a tree that has been cut into a middle finger.',
       33.054696416665436,
       -95.2464644274927,
-      './img/keth-headshot.jpg',
-      './img/keth.png',
+      './img/keith-headshot.jpg',
+      './img/keith.png',
+      'https://www.facebook.com/keith.brasier1',
       10
     );
 
@@ -407,6 +420,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
+      null,
       11
     );
 
@@ -419,6 +433,7 @@ const App = class {
       -95.24567796935563,
       './img/patio-headshot.jpg',
       './img/patio.png',
+      null,
       12
     );
 
@@ -431,6 +446,7 @@ const App = class {
       -95.2456499145124,
       './img/playground-headshot.jpg',
       './img/playground.png',
+      null,
       13
     );
 
@@ -443,6 +459,7 @@ const App = class {
       -95.24605216092242,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
+      null,
       14
     );
 
@@ -455,6 +472,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
+      'https://www.facebook.com/profile.php?id=100074663645504',
       15
     );
   }
@@ -556,8 +574,8 @@ const App = class {
     // Kathy
     this._showResidentContent('kathy', e, this.#kathy.id);
 
-    // Keth
-    this._showResidentContent('keth', e, this.#keth.id);
+    // Keith
+    this._showResidentContent('keith', e, this.#keith.id);
 
     // Mike
     this._showResidentContent('mike', e, this.#mike.id);
@@ -598,7 +616,8 @@ const App = class {
     this._showCurrentResidentContent(
       currentResident.headshotImg,
       this._fixName(currentResident.name),
-      currentResident.backstory
+      currentResident.backstory,
+      currentResident.facebookUrl
     );
   }
 
@@ -619,7 +638,8 @@ const App = class {
     this._showCurrentResidentContent(
       currentResident.headshotImg,
       this._fixName(currentResident.name),
-      currentResident.backstory
+      currentResident.backstory,
+      currentResident.facebookUrl
     );
 
     // Set Popup Content
@@ -650,15 +670,24 @@ const App = class {
     });
   }
 
-  _showCurrentResidentContent(img, name, backstory) {
+  _showCurrentResidentContent(img, name, backstory, facebookUrl) {
     residentContent.innerHTML = `
         <img src="${img}" alt="${name}" class="resident-content__img">
         <h2 class="resident-content__name">${name}</h2>
+        <a href="${facebookUrl}" target="_blank" class="resident-content__facebook"><i class="fa-brands fa-facebook"></i></a>
         <h3 class="resident-content__backstory">Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
         </p>
         `;
+
+    // Select Facebook Icon
+    const facebookIcon = document.querySelector('.resident-content__facebook');
+
+    // Remove Facebook Icon If Resident Doesn't Have Facebook
+    if (facebookUrl === null) {
+      facebookIcon.classList.add('facebook-display');
+    }
   }
 
   _fixName(name) {

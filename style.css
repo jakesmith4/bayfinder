@@ -112,6 +112,18 @@ body {
   font-weight: bold;
 }
 
+.resident-content__facebook {
+  display: block;
+  font-size: 1.65rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  color: #3b5998;
+}
+
+.facebook-display {
+  display: none;
+}
+
 .resident-content__backstory {
   font-size: 1.8rem;
 }
@@ -125,6 +137,12 @@ body {
 @media screen and (min-width: 768px) {
   .resident-content__text {
     max-width: 200px;
+  }
+
+  .resident-content__facebook {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 2rem;
   }
 }
 
