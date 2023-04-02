@@ -115,13 +115,16 @@ body {
 .resident-content__facebook {
   font-size: 2rem;
   color: #3b5998;
+  margin-top: -1.7rem;
+  margin-bottom: -1rem;
 }
 
 .resident-content__name-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .facebook-display {
