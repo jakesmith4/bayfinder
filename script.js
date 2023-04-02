@@ -58,6 +58,7 @@ const App = class {
   #marylou;
   #mike;
   #poolHouse;
+  #patio;
   #wayne_debbie;
 
   constructor() {
@@ -118,6 +119,7 @@ const App = class {
     const kethIcon = this._createIcon(this.#keth.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
+    const patioIcon = this._createIcon(this.#patio.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
 
     // Autum Chree
@@ -164,6 +166,9 @@ const App = class {
       poolhouseIcon,
       this.#poolHouse.popupName
     );
+
+    // Patio
+    this._setMarker(this.#patio.coords, patioIcon, this.#patio.popupName);
 
     // Wayne & Debbie
     this._setMarker(
@@ -315,8 +320,8 @@ const App = class {
       'john joyner',
       'John Joyner',
       'John Joyner is the proud owner of J&J Safety Floor. He is also proud to announce the coming of his new place, the Joyner Cabin.  John has lived in the bay for over 20 years.',
-      33.05622434091173,
-      -95.2470067467671,
+      33.05600388268026,
+      -95.24686400651956,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
       6
@@ -370,6 +375,18 @@ const App = class {
       10
     );
 
+    // Patio
+    this.#patio = new Resident(
+      'patio',
+      'Patio Area',
+      'This is the bay patio area, it is always open. This is where the board hosts there meetings. It has a lot of history behind it as it has always been there since the beginning of the bay.',
+      33.05653564695507,
+      -95.24591549427498,
+      './img/patio-headshot.jpg',
+      './img/patio.png',
+      11
+    );
+
     // Wayne & Debbie
     this.#wayne_debbie = new Resident(
       'wayne_and_debbie',
@@ -379,7 +396,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
-      11
+      12
     );
   }
 
@@ -469,6 +486,9 @@ const App = class {
 
     // Pool House
     this._showResidentContent('pool_house', e, this.#poolHouse.id);
+
+    // Patio
+    this._showResidentContent('patio', e, this.#patio.id);
 
     // Wayne & Debbie
     this._showResidentContent('wayne_debbie', e, this.#wayne_debbie.id);
