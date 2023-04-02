@@ -673,8 +673,10 @@ const App = class {
   _showCurrentResidentContent(img, name, backstory, facebookUrl) {
     residentContent.innerHTML = `
         <img src="${img}" alt="${name}" class="resident-content__img">
+        <div class="resident-content__name-wrapper">
         <h2 class="resident-content__name">${name}</h2>
         <a href="${facebookUrl}" target="_blank" class="resident-content__facebook"><i class="fa-brands fa-facebook"></i></a>
+        </div>
         <h3 class="resident-content__backstory">Backstory</h3>
         <p class="resident-content__text">
           ${backstory}
