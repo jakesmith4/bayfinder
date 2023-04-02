@@ -54,6 +54,7 @@ const App = class {
   #donnette_Allen;
   #jake;
   #john;
+  #keth;
   #marylou;
   #mike;
   #poolHouse;
@@ -114,6 +115,7 @@ const App = class {
     const grandmaIcon = this._createIcon(this.#marylou.iconImg);
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const johnIcon = this._createIcon(this.#john.iconImg);
+    const kethIcon = this._createIcon(this.#keth.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
@@ -149,6 +151,9 @@ const App = class {
 
     // John Joyner
     this._setMarker(this.#john.coords, johnIcon, this.#john.popupName);
+
+    // Keth
+    this._setMarker(this.#keth.coords, kethIcon, this.#keth.popupName);
 
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
@@ -317,6 +322,18 @@ const App = class {
       6
     );
 
+    // Keth
+    this.#keth = new Resident(
+      'keth brasier',
+      'Keth Brasier',
+      'Keth Braser has been in the bay for over 3 years. He works as a truck driver delivering buildings and small homes. You can recognize his place because he has a tree that has been cut into a middle finger.',
+      33.054696416665436,
+      -95.2464644274927,
+      './img/keth-headshot.jpg',
+      './img/keth.png',
+      7
+    );
+
     // Grandma
     this.#marylou = new Resident(
       'marylou leffler',
@@ -326,7 +343,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      7
+      8
     );
 
     // Mike
@@ -338,7 +355,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      8
+      9
     );
 
     // Poolhouse
@@ -350,7 +367,7 @@ const App = class {
       -95.24612013142432,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      9
+      10
     );
 
     // Wayne & Debbie
@@ -362,7 +379,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
-      10
+      11
     );
   }
 
@@ -443,6 +460,9 @@ const App = class {
 
     // John Joyner
     this._showResidentContent('john', e, this.#john.id);
+
+    // Keth
+    this._showResidentContent('keth', e, this.#keth.id);
 
     // Mike
     this._showResidentContent('mike', e, this.#mike.id);
