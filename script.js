@@ -116,6 +116,7 @@ const App = class {
     const dockIcon = this._createIcon(this.#dock.iconImg);
     const donnetteandallen = this._createIcon(this.#donnette_Allen.iconImg);
     const grandmaIcon = this._createIcon(this.#marylou.iconImg);
+    const henryIcon = this._createIcon(this.#henry.iconImg);
     const jakeIcon = this._createIcon(this.#jake.iconImg);
     const johnIcon = this._createIcon(this.#john.iconImg);
     const kethIcon = this._createIcon(this.#keth.iconImg);
@@ -150,6 +151,9 @@ const App = class {
 
     // Grandma
     this._setMarker(this.#marylou.coords, grandmaIcon, this.#marylou.popupName);
+
+    // Henry
+    this._setMarker(this.#henry.coords, henryIcon, this.#henry.popupName);
 
     // Jake
     this._setMarker(this.#jake.coords, jakeIcon, this.#jake.popupName);
@@ -313,6 +317,18 @@ const App = class {
       4
     );
 
+    // Henry
+    this.#henry = new Resident(
+      'henry harrington',
+      'Henry Harrington',
+      'Henry has lived in the bay for quite some time. He owns a four wheeler and is known to go for rides from time to time.',
+      33.05517656830473,
+      -95.24623657577489,
+      './img/henry-headshot.jpg',
+      './img/henry.png',
+      5
+    );
+
     // Jake
     this.#jake = new Resident(
       'jake smith',
@@ -322,7 +338,7 @@ const App = class {
       -95.24646195841026,
       './img/jake-headshot.jpg',
       './img/jake.png',
-      5
+      6
     );
 
     // John Joyner
@@ -334,7 +350,7 @@ const App = class {
       -95.24686400651956,
       './img/john-joyner-headshot.jpg',
       './img/john.png',
-      6
+      7
     );
 
     // Keth
@@ -346,7 +362,7 @@ const App = class {
       -95.2464644274927,
       './img/keth-headshot.jpg',
       './img/keth.png',
-      7
+      8
     );
 
     // Grandma
@@ -358,7 +374,7 @@ const App = class {
       -95.24690133142433,
       './img/marylou-headshot.jpg',
       './img/marylou.png',
-      8
+      9
     );
 
     // Mike
@@ -370,7 +386,7 @@ const App = class {
       -95.24683883142436,
       './img/mike-headshot.jpg',
       './img/mike.png',
-      9
+      10
     );
 
     // Patio
@@ -382,7 +398,7 @@ const App = class {
       -95.24567796935563,
       './img/patio-headshot.jpg',
       './img/patio.png',
-      10
+      11
     );
 
     // Playground
@@ -394,7 +410,7 @@ const App = class {
       -95.2456499145124,
       './img/playground-headshot.jpg',
       './img/playground.png',
-      11
+      12
     );
 
     // Poolhouse
@@ -406,7 +422,7 @@ const App = class {
       -95.24605216092242,
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
-      12
+      13
     );
 
     // Wayne & Debbie
@@ -418,7 +434,7 @@ const App = class {
       -95.24584515017374,
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
-      13
+      14
     );
   }
 
@@ -493,6 +509,9 @@ const App = class {
 
     // Grandma
     this._showResidentContent('marylou', e, this.#marylou.id);
+
+    // Henry
+    this._showResidentContent('henry', e, this.#henry.id);
 
     // Jake
     this._showResidentContent('jake', e, this.#jake.id);
