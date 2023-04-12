@@ -65,6 +65,7 @@ const App = class {
   #patio;
   #playground;
   #poolHouse;
+  #tj;
   #wayne_debbie;
 
   constructor() {
@@ -132,6 +133,7 @@ const App = class {
     const patioIcon = this._createIcon(this.#patio.iconImg);
     const playgroundIcon = this._createIcon(this.#playground.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
+    const tjIcon = this._createIcon(this.#tj.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
 
     // Autum Chree
@@ -194,6 +196,9 @@ const App = class {
       poolhouseIcon,
       this.#poolHouse.popupName
     );
+
+    // Tj
+    this._setMarker(this.#tj.coords, tjIcon, this.#tj.popupName);
 
     // Wayne & Debbie
     this._setMarker(
@@ -463,6 +468,19 @@ const App = class {
       14
     );
 
+    // TJ
+    this.#tj = new Resident(
+      'tj',
+      'Tj Forsyth',
+      'Tj has lived in the bay for over 5 years, he is a very respectable man. Well liked by many and has machine operator skills. He is said to be very good with a skid steer. Give him a shout out if you ever need any dirt work done.',
+      33.05432216233337,
+      -95.24629366333454,
+      './img/tj-headshot.jpg',
+      './img/tj.png',
+      'https://www.facebook.com/thomas.forsyth.796',
+      15
+    );
+
     // Wayne & Debbie
     this.#wayne_debbie = new Resident(
       'wayne_and_debbie',
@@ -473,7 +491,7 @@ const App = class {
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
       'https://www.facebook.com/profile.php?id=100074663645504',
-      15
+      16
     );
   }
 
@@ -588,6 +606,9 @@ const App = class {
 
     // Pool House
     this._showResidentContent('pool_house', e, this.#poolHouse.id);
+
+    // Tj
+    this._showResidentContent('tj', e, this.#tj.id);
 
     // Wayne & Debbie
     this._showResidentContent('wayne_debbie', e, this.#wayne_debbie.id);
