@@ -61,6 +61,7 @@ const App = class {
   #kathy;
   #keith;
   #marylou;
+  #melinda_paul;
   #mike;
   #patio;
   #playground;
@@ -129,6 +130,7 @@ const App = class {
     const johnIcon = this._createIcon(this.#john.iconImg);
     const kathyIcon = this._createIcon(this.#kathy.iconImg);
     const keithIcon = this._createIcon(this.#keith.iconImg);
+    const melindaAndPaulIcon = this._createIcon(this.#melinda_paul.iconImg);
     const mikeIcon = this._createIcon(this.#mike.iconImg);
     const patioIcon = this._createIcon(this.#patio.iconImg);
     const playgroundIcon = this._createIcon(this.#playground.iconImg);
@@ -176,6 +178,13 @@ const App = class {
 
     // Keith
     this._setMarker(this.#keith.coords, keithIcon, this.#keith.popupName);
+
+    // Melinda & Paul
+    this._setMarker(
+      this.#melinda_paul.coords,
+      melindaAndPaulIcon,
+      this.#melinda_paul.popupName
+    );
 
     // Mike
     this._setMarker(this.#mike.coords, mikeIcon, this.#mike.popupName);
@@ -416,6 +425,19 @@ const App = class {
       10
     );
 
+    // Melinda & Paul
+    this.#melinda_paul = new Resident(
+      'melinda_and_paul',
+      'Melinda & Paul',
+      'Melinda and Paul have been living in the bay for over 5 years. Melinda currently works clearing out storage units and Paul works at a plant. They are a very happy couple',
+      33.05348132704227,
+      -95.2475745476261,
+      './img/melinda-paul-headshot.jpg',
+      './img/melinda_paul.png',
+      'https://www.facebook.com/mel.will.904',
+      11
+    );
+
     // Mike
     this.#mike = new Resident(
       'mike',
@@ -426,7 +448,7 @@ const App = class {
       './img/mike-headshot.jpg',
       './img/mike.png',
       null,
-      11
+      12
     );
 
     // Patio
@@ -439,7 +461,7 @@ const App = class {
       './img/patio-headshot.jpg',
       './img/patio.png',
       null,
-      12
+      13
     );
 
     // Playground
@@ -452,7 +474,7 @@ const App = class {
       './img/playground-headshot.jpg',
       './img/playground.png',
       null,
-      13
+      14
     );
 
     // Poolhouse
@@ -465,7 +487,7 @@ const App = class {
       './img/pool-house-headshot.jpg',
       './img/pool_house.png',
       null,
-      14
+      15
     );
 
     // TJ
@@ -478,7 +500,7 @@ const App = class {
       './img/tj-headshot.jpg',
       './img/tj.png',
       'https://www.facebook.com/thomas.forsyth.796',
-      15
+      16
     );
 
     // Wayne & Debbie
@@ -491,7 +513,7 @@ const App = class {
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
       'https://www.facebook.com/profile.php?id=100074663645504',
-      16
+      17
     );
   }
 
@@ -594,6 +616,9 @@ const App = class {
 
     // Keith
     this._showResidentContent('keith', e, this.#keith.id);
+
+    // Melinda & Paul
+    this._showResidentContent('melinda_paul', e, this.#melinda_paul.id);
 
     // Mike
     this._showResidentContent('mike', e, this.#mike.id);
