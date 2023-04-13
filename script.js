@@ -69,6 +69,7 @@ const App = class {
   #poolHouse;
   #tj;
   #wayne_debbie;
+  #weathers;
 
   constructor() {
     // Load Map
@@ -139,6 +140,7 @@ const App = class {
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
     const tjIcon = this._createIcon(this.#tj.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
+    const weathersIcon = this._createIcon(this.#weathers.iconImg);
 
     // Autum Chree
     this._setMarker(this.#autum.coords, autumIcon, this.#autum.popupName);
@@ -219,6 +221,13 @@ const App = class {
       this.#wayne_debbie.coords,
       wayneAndDebbieIcon,
       this.#wayne_debbie.popupName
+    );
+
+    // Weathers
+    this._setMarker(
+      this.#weathers.coords,
+      weathersIcon,
+      this.#weathers.popupName
     );
   }
 
@@ -448,8 +457,8 @@ const App = class {
       'melinda_and_paul',
       'Melinda & Paul',
       'Melinda and Paul have been living in the bay for over 5 years. Melinda currently works clearing out storage units and Paul works at a plant. They are a very happy couple',
-      33.05348132704227,
-      -95.2475745476261,
+      33.05304433382996,
+      -95.24686334604998,
       './img/melinda-paul-headshot.jpg',
       './img/melinda_paul.png',
       'https://www.facebook.com/mel.will.904',
@@ -532,6 +541,19 @@ const App = class {
       './img/wayne_debbie.png',
       'https://www.facebook.com/profile.php?id=100074663645504',
       18
+    );
+
+    // Weathers
+    this.#weathers = new Resident(
+      'weathers',
+      'Mike Weathers',
+      'Weathers is a very cool guy and is very respectable, he lives over on the corner and always waves hi when your walking or driving by. He is also the life of the party!!',
+      33.053461832655145,
+      -95.24755927435432,
+      './img/weathers-headshot.jpg',
+      './img/weathers.png',
+      'https://www.facebook.com/mike.weathers.146',
+      19
     );
   }
 
@@ -658,6 +680,9 @@ const App = class {
 
     // Wayne & Debbie
     this._showResidentContent('wayne_debbie', e, this.#wayne_debbie.id);
+
+    // Weathers
+    this._showResidentContent('weathers', e, this.#weathers.id);
   }
 
   _showResidentContent(name, e, id) {
