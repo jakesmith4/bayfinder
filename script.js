@@ -67,6 +67,7 @@ const App = class {
   #patio;
   #playground;
   #poolHouse;
+  #rickyBobby;
   #tj;
   #wayne_debbie;
   #weathers;
@@ -138,6 +139,7 @@ const App = class {
     const patioIcon = this._createIcon(this.#patio.iconImg);
     const playgroundIcon = this._createIcon(this.#playground.iconImg);
     const poolhouseIcon = this._createIcon(this.#poolHouse.iconImg);
+    const rickyBobbyIcon = this._createIcon(this.#rickyBobby.iconImg);
     const tjIcon = this._createIcon(this.#tj.iconImg);
     const wayneAndDebbieIcon = this._createIcon(this.#wayne_debbie.iconImg);
     const weathersIcon = this._createIcon(this.#weathers.iconImg);
@@ -211,6 +213,13 @@ const App = class {
       this.#poolHouse.coords,
       poolhouseIcon,
       this.#poolHouse.popupName
+    );
+
+    // Ricky Bobby
+    this._setMarker(
+      this.#rickyBobby.coords,
+      rickyBobbyIcon,
+      this.#rickyBobby.popupName
     );
 
     // Tj
@@ -517,6 +526,19 @@ const App = class {
       16
     );
 
+    // Ricky Bobby
+    this.#rickyBobby = new Resident(
+      'ricky_bobby',
+      'Ricky Bobby',
+      'Ricky Bobby is one of the crack heads of the bay. He has been on meth for quite a while now and says he is never getting off. He is not such a bad guy after all. He wont steal your shit or disrespect you. But he is a crack head',
+      33.05333790406595,
+      -95.24803203530927,
+      './img/ricky-bobby-headshot.jpg',
+      './img/ricky_bobby.png',
+      null,
+      17
+    );
+
     // TJ
     this.#tj = new Resident(
       'tj',
@@ -527,7 +549,7 @@ const App = class {
       './img/tj-headshot.jpg',
       './img/tj.png',
       'https://www.facebook.com/thomas.forsyth.796',
-      17
+      18
     );
 
     // Wayne & Debbie
@@ -540,7 +562,7 @@ const App = class {
       './img/wayne-debbie-headshot.jpg',
       './img/wayne_debbie.png',
       'https://www.facebook.com/profile.php?id=100074663645504',
-      18
+      19
     );
 
     // Weathers
@@ -553,7 +575,7 @@ const App = class {
       './img/weathers-headshot.jpg',
       './img/weathers.png',
       'https://www.facebook.com/mike.weathers.146',
-      19
+      20
     );
   }
 
@@ -674,6 +696,9 @@ const App = class {
 
     // Pool House
     this._showResidentContent('pool_house', e, this.#poolHouse.id);
+
+    // Ricky Bobby
+    this._showResidentContent('ricky_bobby', e, this.#rickyBobby.id);
 
     // Tj
     this._showResidentContent('tj', e, this.#tj.id);
